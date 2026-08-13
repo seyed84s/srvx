@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0E1020"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="48dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SRVX"
+            android:textColor="#E3C072"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.3"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ورود به حساب"
+            android:textColor="#9AA0C8"
+            android:textSize="14sp"
+            android:layout_marginBottom="36dp" />
+
+        <EditText
+            android:id="@+id/srvx_username"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:hint="نام کاربری"
+            android:textColor="#E8E9F5"
+            android:textColorHint="#9AA0C8"
+            android:background="#1A1E3D"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:inputType="text"
+            android:maxLines="1"
+            android:layout_marginBottom="14dp" />
+
+        <EditText
+            android:id="@+id/srvx_password"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:hint="رمز عبور"
+            android:textColor="#E8E9F5"
+            android:textColorHint="#9AA0C8"
+            android:background="#1A1E3D"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:id="@+id/srvx_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#E0607A"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp" />
+
+        <Button
+            android:id="@+id/srvx_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="ورود"
+            android:textColor="#0E1020"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:backgroundTint="#C9A24B" />
+
+        <ProgressBar
+            android:id="@+id/srvx_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>
