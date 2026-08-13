@@ -102,11 +102,6 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
         SubscriptionUpdater.sync()
         mainViewModel.reloadServerList()
 
-        // SRVX: fetch this user's configs and import them, then refresh the list
-        com.v2ray.ang.srvx.SrvxSyncHook.run(this) {
-            mainViewModel.reloadServerList()
-        }
-
         checkAndRequestPermission(PermissionType.POST_NOTIFICATIONS) {
         }
     }

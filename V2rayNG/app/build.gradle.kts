@@ -9,7 +9,7 @@ android {
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.v2ray.ang"
+        applicationId = "ir.smcx.srvx"
         minSdk = 24
         targetSdk = 37
         versionCode = 733

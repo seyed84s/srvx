@@ -11,13 +11,9 @@ permissions:
   contents: read
 
 # ============================================================
-#  IMPORTANT: pick the libv2ray (Xray core) version here.
-#  This must be a core version that BOTH:
-#    - is compatible with v2rayNG 2.2.3, AND
-#    - still allows VLESS without TLS.
-#  Set the tag below from https://github.com/2dust/AndroidLibXrayLite/tags
-#  Start with the one you confirmed works; if connect fails, try an
-#  older tag that is closer in date to v2rayNG 2.2.3's release.
+#  Pick the libv2ray (Xray core) version here. Must be compatible
+#  with v2rayNG 2.2.3 AND still allow VLESS without TLS.
+#  Tags: https://github.com/2dust/AndroidLibXrayLite/tags
 # ============================================================
 env:
   LIBV2RAY_TAG: 'v26.6.1'
@@ -28,9 +24,14 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      with:
-        submodules: 'recursive'
-        fetch-depth: '0'
+
+    # The uploaded repo has EMPTY submodule folders (zip upload drops
+    # submodule contents), so clone them explicitly here.
+    - name: Clone submodules manually
+      run: |
+        rm -rf hev-socks5-tunnel AndroidLibXrayLite
+        git clone --depth 1 --recursive https://github.com/heiher/hev-socks5-tunnel hev-socks5-tunnel
+        git clone --depth 1 https://github.com/2dust/AndroidLibXrayLite AndroidLibXrayLite
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v4
@@ -71,12 +72,18 @@ jobs:
         distribution: 'temurin'
         java-version: '21'
 
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '9.5.1'
+
     - name: Build debug APK
       run: |
         cd ${{ github.workspace }}/V2rayNG
         echo "sdk.dir=${ANDROID_HOME}" > local.properties
-        chmod 755 gradlew
-        ./gradlew assembleDebug --stacktrace
+        # gradle-wrapper.jar is gitignored (*.jar) so it may be missing from the
+        # uploaded repo; use the system gradle installed above instead of ./gradlew
+        gradle assembleDebug --stacktrace
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
