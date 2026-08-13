@@ -72,12 +72,18 @@ jobs:
         distribution: 'temurin'
         java-version: '21'
 
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '9.5.1'
+
     - name: Build debug APK
       run: |
         cd ${{ github.workspace }}/V2rayNG
         echo "sdk.dir=${ANDROID_HOME}" > local.properties
-        chmod 755 gradlew
-        ./gradlew assembleDebug --stacktrace
+        # gradle-wrapper.jar is gitignored (*.jar) so it may be missing from the
+        # uploaded repo; use the system gradle installed above instead of ./gradlew
+        gradle assembleDebug --stacktrace
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
