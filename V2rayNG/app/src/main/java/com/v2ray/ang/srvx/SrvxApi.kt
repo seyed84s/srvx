@@ -65,6 +65,22 @@ object SrvxApi {
         }
     }
 
+    data class UsageInfo(val remainingBytes: Long, val totalBytes: Long, val expiryTs: Long)
+
+    fun fetchUsage(token: String): UsageInfo? {
+        return try {
+            val res = get("/api/configs", token) ?: return null
+            val (code, text) = res
+            if (code !in 200..299) return null
+            val o = JSONObject(text)
+            UsageInfo(
+                o.optLong("remaining_bytes", 0L),
+                o.optLong("total_bytes", 0L),
+                o.optLong("expiry_ts", 0L)
+            )
+        } catch (e: Throwable) { null }
+    }
+
     fun fetchConfigs(token: String): UserConfigs? {
         return try {
             val res = get("/api/configs", token) ?: return null

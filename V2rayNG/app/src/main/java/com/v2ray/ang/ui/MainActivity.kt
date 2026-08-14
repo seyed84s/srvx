@@ -102,6 +102,9 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
         SubscriptionUpdater.sync()
         mainViewModel.reloadServerList()
 
+        // SRVX: show remaining data + time for the logged-in user
+        com.v2ray.ang.srvx.SrvxStatus.refresh(this)
+
         checkAndRequestPermission(PermissionType.POST_NOTIFICATIONS) {
         }
     }
@@ -204,6 +207,8 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
 
     override fun onResume() {
         super.onResume()
+        // SRVX: refresh remaining data + time each time the screen returns
+        com.v2ray.ang.srvx.SrvxStatus.refresh(this)
     }
 
     override fun onPause() {

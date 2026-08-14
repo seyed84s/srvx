@@ -41,14 +41,6 @@
             android:paddingStart="10dp"
             android:layout_marginTop="22dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="شبکه خصوصی"
-            android:textColor="#8A91BE"
-            android:textSize="13sp"
-            android:layout_marginTop="6dp" />
-
         <!-- hairline rule with centre diamond -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -140,19 +132,19 @@
             android:layout_height="56dp"
             android:layout_marginTop="8dp">
 
-            <Button
+            <TextView
                 android:id="@+id/srvx_login_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/srvx_button"
-                android:backgroundTint="@null"
                 android:text="ورود"
                 android:textColor="#0A0D1E"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.06"
-                android:stateListAnimator="@null"
-                android:elevation="0dp" />
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true" />
 
             <ProgressBar
                 android:id="@+id/srvx_progress"

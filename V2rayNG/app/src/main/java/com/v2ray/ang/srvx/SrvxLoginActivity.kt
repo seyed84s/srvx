@@ -3,7 +3,6 @@ package com.v2ray.ang.srvx
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -32,7 +31,7 @@ class SrvxLoginActivity : AppCompatActivity() {
         val userField = findViewById<EditText>(R.id.srvx_username)
         val passField = findViewById<EditText>(R.id.srvx_password)
         val errorText = findViewById<TextView>(R.id.srvx_error)
-        val loginBtn = findViewById<Button>(R.id.srvx_login_btn)
+        val loginBtn = findViewById<TextView>(R.id.srvx_login_btn)
         val progress = findViewById<ProgressBar>(R.id.srvx_progress)
 
         loginBtn.setOnClickListener {
