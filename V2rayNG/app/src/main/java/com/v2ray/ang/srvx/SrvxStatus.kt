@@ -33,15 +33,20 @@ object SrvxStatus {
             timeView.text = if (info.expiryTs <= 0L) "نامحدود"
                             else formatRemainingDays(info.expiryTs)
             bar.visibility = View.VISIBLE
+            bar.setOnClickListener {
+                dataView.text = "…"
+                timeView.text = "…"
+                refresh(activity)
+            }
         }
     }
 
     private fun formatBytes(b: Long): String {
         if (b <= 0) return "0"
         val gb = b / (1024.0 * 1024.0 * 1024.0)
-        if (gb >= 1.0) return String.format("%.1f GB", gb)
+        if (gb >= 1.0) return String.format("%.2f GB", gb)
         val mb = b / (1024.0 * 1024.0)
-        return String.format("%.0f MB", mb)
+        return String.format("%.2f MB", mb)
     }
 
     private fun formatRemainingDays(expiryTs: Long): String {
