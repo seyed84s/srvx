@@ -10,11 +10,6 @@ on:
 permissions:
   contents: read
 
-# ============================================================
-#  Pick the libv2ray (Xray core) version here. Must be compatible
-#  with v2rayNG 2.2.3 AND still allow VLESS without TLS.
-#  Tags: https://github.com/2dust/AndroidLibXrayLite/tags
-# ============================================================
 env:
   LIBV2RAY_TAG: 'v26.6.1'
 
@@ -25,8 +20,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # The uploaded repo has EMPTY submodule folders (zip upload drops
-    # submodule contents), so clone them explicitly here.
     - name: Clone submodules manually
       run: |
         rm -rf hev-socks5-tunnel AndroidLibXrayLite
@@ -77,13 +70,22 @@ jobs:
       with:
         gradle-version: '9.5.1'
 
-    - name: Build debug APK
+    # Recreate the keystore from the base64 secret
+    - name: Decode keystore
+      run: |
+        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > ${{ github.workspace }}/V2rayNG/app/srvx-release.keystore
+        echo "SRVX_KEYSTORE_PATH=${{ github.workspace }}/V2rayNG/app/srvx-release.keystore" >> $GITHUB_ENV
+
+    - name: Build signed release APK
+      env:
+        SRVX_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        SRVX_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        SRVX_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
       run: |
         cd ${{ github.workspace }}/V2rayNG
         echo "sdk.dir=${ANDROID_HOME}" > local.properties
-        # gradle-wrapper.jar is gitignored (*.jar) so it may be missing from the
-        # uploaded repo; use the system gradle installed above instead of ./gradlew
-        gradle assembleDebug --stacktrace
+        chmod 755 gradlew
+        gradle assembleFdroidRelease --stacktrace
 
     - name: Upload APK
       uses: actions/upload-artifact@v4

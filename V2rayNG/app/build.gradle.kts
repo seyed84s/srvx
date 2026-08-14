@@ -38,9 +38,26 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("srvx") {
+            val ksPath = System.getenv("SRVX_KEYSTORE_PATH") ?: "srvx-release.keystore"
+            val ksFile = file(ksPath)
+            if (ksFile.exists()) {
+                storeFile = ksFile
+                storePassword = System.getenv("SRVX_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("SRVX_KEY_ALIAS")
+                keyPassword = System.getenv("SRVX_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
+            // sign with the SRVX key when the keystore is present (CI)
+            if (file(System.getenv("SRVX_KEYSTORE_PATH") ?: "srvx-release.keystore").exists()) {
+                signingConfig = signingConfigs.getByName("srvx")
+            }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -52,7 +69,6 @@ android {
     productFlavors {
         create("fdroid") {
             dimension = "distribution"
-            applicationIdSuffix = ".fdroid"
             buildConfigField("String", "DISTRIBUTION", "\"F-Droid\"")
         }
         create("playstore") {
