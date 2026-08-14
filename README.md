@@ -1,32 +1,64 @@
-# v2rayNG
+<div align="center">
 
-A V2Ray client for Android, support [Xray core](https://github.com/XTLS/Xray-core) and [v2fly core](https://github.com/v2fly/v2ray-core)
+# ⚝ SRVX
 
-[![API](https://img.shields.io/badge/API-24%2B-yellow.svg?style=flat)](https://developer.android.com/about/versions/lollipop)
-[![Kotlin Version](https://img.shields.io/badge/Kotlin-2.3.21-blue.svg)](https://kotlinlang.org)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/2dust/v2rayNG)](https://github.com/2dust/v2rayNG/commits/master)
-[![CodeFactor](https://www.codefactor.io/repository/github/2dust/v2rayng/badge)](https://www.codefactor.io/repository/github/2dust/v2rayng)
-[![GitHub Releases](https://img.shields.io/github/downloads/2dust/v2rayNG/latest/total?logo=github)](https://github.com/2dust/v2rayNG/releases)
-[![Chat on Telegram](https://img.shields.io/badge/Chat%20on-Telegram-brightgreen.svg)](https://t.me/v2rayn)
+**شبکه خصوصی امن، ساده و سریع**
 
-### Telegram Channel
-[github_2dust](https://t.me/github_2dust)
+اپلیکیشن اندروید برای اتصال امن به اینترنت — بدون تنظیمات پیچیده.
+فقط وارد شو، وصل شو.
 
-### Usage
+</div>
 
-#### Geoip and Geosite
-- geoip.dat and geosite.dat files are in `Android/data/com.v2ray.ang/files/assets` (path may differ on some Android device)
-- download feature will get enhanced version in this [repo](https://github.com/Loyalsoldier/v2ray-rules-dat) (Note it need a working proxy)
-- latest official [domain list](https://github.com/Loyalsoldier/v2ray-rules-dat) and [ip list](https://github.com/Loyalsoldier/geoip) can be imported manually
-- possible to use third party dat file in the same folder, like [h2y](https://guide.v2fly.org/routing/sitedata.html#%E5%A4%96%E7%BD%AE%E7%9A%84%E5%9F%9F%E5%90%8D%E6%96%87%E4%BB%B6)
+---
 
-### More in our [wiki](https://github.com/2dust/v2rayNG/wiki)
+## ✨ ویژگی‌ها
 
-### Development guide
+- 🔐 **ورود با حساب کاربری** — هر کاربر با نام کاربری و رمز خودش وارد می‌شود.
+- ⚡ **اتصال یک‌لمسی** — بعد از ورود، کانفیگ‌های شما خودکار اضافه می‌شوند. فقط دکمه‌ی اتصال را بزنید.
+- 🌍 **چند سرور** — انتخاب بین سرورهای مختلف با یک ضربه.
+- 📊 **نمایش حجم و زمان باقی‌مانده** — همیشه بدانید چقدر از اشتراکتان مانده.
+- 🌗 **حالت تیره و روشن** — تم دلخواهتان را انتخاب کنید.
+- 🎯 **بدون شلوغی** — رابط کاربری تمیز و ساده، فقط چیزهایی که لازم دارید.
 
-Android project under V2rayNG folder can be compiled directly in Android Studio, or using Gradle wrapper. But the v2ray core inside the aar is (probably) outdated.  
-The aar can be compiled from the Golang project [AndroidLibV2rayLite](https://github.com/2dust/AndroidLibV2rayLite) or [AndroidLibXrayLite](https://github.com/2dust/AndroidLibXrayLite).
-For a quick start, read guide for [Go Mobile](https://github.com/golang/go/wiki/Mobile) and [Makefiles for Go Developers](https://tutorialedge.net/golang/makefiles-for-go-developers/)
+---
 
-v2rayNG can run on Android Emulators. For WSA, VPN permission need to be granted via
-`appops set [package name] ACTIVATE_VPN allow`
+## 📥 نصب
+
+1. آخرین نسخه‌ی **APK** را از بخش [Releases](../../releases) دانلود کنید.
+2. فایل دانلودشده را باز کنید تا نصب شروع شود.
+3. اگر پیام **«App blocked» یا «Play Protect»** دیدید:
+   - روی **Install anyway** (نصب در هر صورت) بزنید.
+   - این پیام برای همه‌ی برنامه‌هایی که خارج از Google Play نصب می‌شوند طبیعی است و مشکلی ندارد.
+4. برنامه را باز کنید.
+
+---
+
+## 🚀 شروع به کار
+
+1. برنامه را باز کنید.
+2. **نام کاربری و رمز** خود را وارد کنید (که از پشتیبانی دریافت کرده‌اید).
+3. روی **ورود** بزنید — کانفیگ‌های شما خودکار اضافه می‌شوند.
+4. سرور دلخواهتان را انتخاب و روی دکمه‌ی **اتصال** بزنید.
+
+همین! حالا به اینترنت امن وصل هستید. ✅
+
+---
+
+## ❓ سوالات رایج
+
+**کانفیگ‌هایم را نمی‌بینم؟**
+مطمئن شوید به اینترنت وصل هستید و درست وارد شده‌اید. برنامه را ببندید و دوباره باز کنید.
+
+**حجم یا زمانم تمام شده؟**
+برای تمدید اشتراک با پشتیبانی تماس بگیرید.
+
+**اتصال برقرار نمی‌شود؟**
+سرور دیگری را امتحان کنید. اگر باز هم مشکل بود، به پشتیبانی اطلاع دهید.
+
+---
+
+<div align="center">
+
+**SRVX** — ساخته‌شده برای سادگی و امنیت
+
+</div>
