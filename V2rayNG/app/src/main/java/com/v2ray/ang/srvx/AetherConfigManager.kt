@@ -83,7 +83,7 @@ object AetherConfigManager {
             server = "127.0.0.1"
             serverPort = AetherEngine.SOCKS_PORT.toString()
         }
-        MmkvManager.encodeServerConfig("", p2)
+        val guid2 = MmkvManager.encodeServerConfig("", p2)
 
         // 3. 🚀 Aether — WARP*2 (Double Hop Anti-DPI)
         val p3 = ProfileItem.create(EConfigType.SOCKS).apply {
@@ -92,7 +92,17 @@ object AetherConfigManager {
             server = "127.0.0.1"
             serverPort = AetherEngine.SOCKS_PORT.toString()
         }
-        MmkvManager.encodeServerConfig("", p3)
+        val guid3 = MmkvManager.encodeServerConfig("", p3)
+
+        // Move free configs to the bottom of the list
+        val serverList = MmkvManager.decodeServerList("")
+        serverList.remove(guid1)
+        serverList.remove(guid2)
+        serverList.remove(guid3)
+        serverList.add(guid1)
+        serverList.add(guid2)
+        serverList.add(guid3)
+        MmkvManager.encodeServerList(serverList, "")
 
         if (MmkvManager.getSelectServer().isNullOrEmpty()) {
             MmkvManager.setSelectServer(guid1)
