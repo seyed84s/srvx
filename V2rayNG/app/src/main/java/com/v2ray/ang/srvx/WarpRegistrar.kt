@@ -20,6 +20,10 @@ data class WarpAccount(
     val id: String
 )
 
+/**
+ * Handles genuine Cloudflare WARP device registration via the public API.
+ * Registration is fully automated and invisible to the user.
+ */
 object WarpRegistrar {
 
     private const val PREF_WARP_PRIV_KEY = "pref_warp_priv_key"
@@ -30,23 +34,15 @@ object WarpRegistrar {
     private const val PREF_WARP_TOKEN = "pref_warp_token"
     private const val PREF_WARP_ID = "pref_warp_id"
 
-    // Default fallback account if offline
-    private val DEFAULT_FALLBACK = WarpAccount(
-        privateKey = "aA==",
-        publicKey = "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-        localAddressV4 = "172.16.0.2/32",
-        localAddressV6 = "2606:4700:110:87e5:24e7:7fef:a1c1:5a4a/128",
-        reserved = "0,0,0",
-        token = "",
-        id = ""
-    )
-
     fun getSavedAccount(): WarpAccount? {
         val priv = MmkvManager.decodeSettingsString(PREF_WARP_PRIV_KEY) ?: return null
+        if (priv.length < 40) return null // Invalid key, too short for 32 bytes base64
         val pub = MmkvManager.decodeSettingsString(PREF_WARP_PUB_KEY) ?: return null
         val v4 = MmkvManager.decodeSettingsString(PREF_WARP_V4) ?: "172.16.0.2/32"
-        val v6 = MmkvManager.decodeSettingsString(PREF_WARP_V6) ?: "2606:4700:110:87e5:24e7:7fef:a1c1:5a4a/128"
-        val res = MmkvManager.decodeSettingsString(PREF_WARP_RESERVED) ?: "0,0,0"
+        val v6 = MmkvManager.decodeSettingsString(PREF_WARP_V6)
+            ?: "2606:4700:110:8f55:d46:513c:db6a:8a22/128"
+        val res = MmkvManager.decodeSettingsString(PREF_WARP_RESERVED) ?: return null
+        if (res == "0,0,0") return null // Never got real reserved bytes → re-register
         val tok = MmkvManager.decodeSettingsString(PREF_WARP_TOKEN) ?: ""
         val id = MmkvManager.decodeSettingsString(PREF_WARP_ID) ?: ""
         return WarpAccount(priv, pub, v4, v6, res, tok, id)
@@ -62,10 +58,23 @@ object WarpRegistrar {
         MmkvManager.encodeSettings(PREF_WARP_ID, acc.id)
     }
 
+    /** Clears saved account so next register() creates a fresh one. */
+    fun clearAccount() {
+        MmkvManager.encodeSettings(PREF_WARP_PRIV_KEY, null as String?)
+        MmkvManager.encodeSettings(PREF_WARP_PUB_KEY, null as String?)
+        MmkvManager.encodeSettings(PREF_WARP_V4, null as String?)
+        MmkvManager.encodeSettings(PREF_WARP_V6, null as String?)
+        MmkvManager.encodeSettings(PREF_WARP_RESERVED, null as String?)
+        MmkvManager.encodeSettings(PREF_WARP_TOKEN, null as String?)
+        MmkvManager.encodeSettings(PREF_WARP_ID, null as String?)
+    }
+
     /**
-     * Registers a genuine Cloudflare WARP account via the public registration API.
+     * Registers a genuine Cloudflare WARP device.
+     * Returns a cached account if valid, otherwise performs a fresh registration.
+     * This is a BLOCKING call — must be called from a background thread.
      */
-    fun register(): WarpAccount {
+    fun register(): WarpAccount? {
         // Return existing cached valid account if available
         getSavedAccount()?.let { return it }
 
@@ -88,11 +97,12 @@ object WarpRegistrar {
                 put("locale", "en_US")
             }
 
-            val conn = (URL("https://api.cloudflareclient.com/v0a2158/reg").openConnection() as HttpURLConnection).apply {
+            val conn = (URL("https://api.cloudflareclient.com/v0a2158/reg")
+                .openConnection() as HttpURLConnection).apply {
                 requestMethod = "POST"
                 doOutput = true
-                connectTimeout = 10000
-                readTimeout = 10000
+                connectTimeout = 15000
+                readTimeout = 15000
                 setRequestProperty("Content-Type", "application/json; charset=UTF-8")
                 setRequestProperty("User-Agent", "okhttp/3.12.1")
             }
@@ -105,16 +115,17 @@ object WarpRegistrar {
 
             if (code in 200..299 && responseText.isNotEmpty()) {
                 val json = JSONObject(responseText)
-                val id = json.optString("id")
-                val token = json.optString("token")
+                val id = json.optString("id", "")
+                val token = json.optString("token", "")
                 val config = json.optJSONObject("config")
                 val iface = config?.optJSONObject("interface")
                 val addrs = iface?.optJSONObject("addresses")
                 val v4 = addrs?.optString("v4", "172.16.0.2/32") ?: "172.16.0.2/32"
-                val v6 = addrs?.optString("v6", "2606:4700:110:87e5:24e7:7fef:a1c1:5a4a/128") ?: "2606:4700:110:87e5:24e7:7fef:a1c1:5a4a/128"
+                val v6 = addrs?.optString("v6", "2606:4700:110:8f55:d46:513c:db6a:8a22/128")
+                    ?: "2606:4700:110:8f55:d46:513c:db6a:8a22/128"
 
-                // Extract client_id reserved bytes
-                val reserved = parseReservedFromId(id)
+                // Extract reserved bytes from client_id (base64-encoded 3 bytes)
+                val reserved = extractReservedFromClientId(config)
 
                 val account = WarpAccount(
                     privateKey = privBase64,
@@ -128,26 +139,27 @@ object WarpRegistrar {
                 saveAccount(account)
                 account
             } else {
-                DEFAULT_FALLBACK.copy(privateKey = privBase64, publicKey = pubBase64)
+                null // Registration failed — don't return garbage
             }
         } catch (e: Throwable) {
-            val privBytes = Curve25519.generatePrivateKey()
-            val pubBytes = Curve25519.eval(privBytes)
-            DEFAULT_FALLBACK.copy(
-                privateKey = Base64.encodeToString(privBytes, Base64.NO_WRAP),
-                publicKey = Base64.encodeToString(pubBytes, Base64.NO_WRAP)
-            )
+            null // Network error — caller will handle
         }
     }
 
-    private fun parseReservedFromId(id: String): String {
+    /**
+     * Extracts the 3 reserved bytes from the `client_id` field in the WARP API response.
+     * `client_id` is a Base64-encoded 3-byte value.
+     */
+    private fun extractReservedFromClientId(config: JSONObject?): String {
         return try {
-            val cleanId = id.replace("-", "")
-            if (cleanId.length >= 6) {
-                val r1 = cleanId.substring(0, 2).toInt(16)
-                val r2 = cleanId.substring(2, 4).toInt(16)
-                val r3 = cleanId.substring(4, 6).toInt(16)
-                "$r1,$r2,$r3"
+            val clientId = config?.optString("client_id", "") ?: ""
+            if (clientId.isNotEmpty()) {
+                val bytes = Base64.decode(clientId, Base64.DEFAULT)
+                if (bytes.size >= 3) {
+                    "${bytes[0].toInt() and 0xFF},${bytes[1].toInt() and 0xFF},${bytes[2].toInt() and 0xFF}"
+                } else {
+                    "0,0,0"
+                }
             } else {
                 "0,0,0"
             }

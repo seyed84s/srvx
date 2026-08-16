@@ -11,7 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.v2ray.ang.R
+import kotlinx.coroutines.launch
 
 class AetherSettingsActivity : AppCompatActivity() {
 
@@ -68,12 +70,20 @@ class AetherSettingsActivity : AppCompatActivity() {
             }
             AetherConfigManager.setScanMode(mode)
 
-            // Rebuild/update free configs with new settings
-            AetherConfigManager.ensureFreeConfigs(forceRefresh = true)
-            updateStatusBadge(badgeStatus)
-
-            Toast.makeText(this, "تنظیمات Aether با موفقیت ذخیره و اعمال شد ✨", Toast.LENGTH_SHORT).show()
-            finish()
+            // Rebuild/update free configs with new settings (async)
+            lifecycleScope.launch {
+                val ok = AetherConfigManager.ensureFreeConfigs(forceRefresh = true)
+                updateStatusBadge(badgeStatus)
+                if (ok) {
+                    Toast.makeText(this@AetherSettingsActivity,
+                        "تنظیمات Aether با موفقیت ذخیره و اعمال شد ✨", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@AetherSettingsActivity,
+                        "ذخیره شد ولی ثبت‌نام کلودفلر ناموفق بود — اینترنت را بررسی کنید", Toast.LENGTH_LONG).show()
+                }
+                finish()
+            }
+            Unit
         }
 
         btnSaveTop.setOnClickListener { saveAction() }
@@ -91,8 +101,20 @@ class AetherSettingsActivity : AppCompatActivity() {
 
         btnRebuild.setOnClickListener {
             SrvxHaptics.click(this, btnRebuild)
-            AetherConfigManager.ensureFreeConfigs(forceRefresh = true)
-            Toast.makeText(this, "۳ کانفیگ Aether با اسکن توربو بازسازی شدند 🚀", Toast.LENGTH_SHORT).show()
+            btnRebuild.isEnabled = false
+            btnRebuild.alpha = 0.5f
+            lifecycleScope.launch {
+                val ok = AetherConfigManager.ensureFreeConfigs(forceRefresh = true)
+                btnRebuild.isEnabled = true
+                btnRebuild.alpha = 1f
+                if (ok) {
+                    Toast.makeText(this@AetherSettingsActivity,
+                        "۳ کانفیگ Aether بازسازی شدند 🚀", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@AetherSettingsActivity,
+                        "خطا در ارتباط با سرور — لطفاً دوباره تلاش کنید", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

@@ -57,10 +57,32 @@ class SrvxLoginActivity : AppCompatActivity() {
         // Guest Mode (Free Aether Network)
         cardGuestMode?.setOnClickListener {
             com.v2ray.ang.srvx.SrvxHaptics.success(this)
-            SrvxSession.setGuestMode(this, true)
-            AetherConfigManager.ensureFreeConfigs()
-            Toast.makeText(this, "ورود به شبکه رایگان Aether با اسکن توربو 🌐⚡", Toast.LENGTH_SHORT).show()
-            goMain()
+            // Disable card to prevent double-tap
+            cardGuestMode.isEnabled = false
+            cardGuestMode.alpha = 0.5f
+            progress.visibility = View.VISIBLE
+
+            lifecycleScope.launch {
+                SrvxSession.setGuestMode(this@SrvxLoginActivity, true)
+
+                // Await WARP registration and profile creation (runs on IO thread)
+                val ok = AetherConfigManager.ensureFreeConfigs()
+
+                if (ok) {
+                    Toast.makeText(this@SrvxLoginActivity,
+                        "شبکه رایگان Aether فعال شد 🌐⚡", Toast.LENGTH_SHORT).show()
+                    goMain()
+                } else {
+                    // Registration failed (probably offline)
+                    SrvxSession.setGuestMode(this@SrvxLoginActivity, false)
+                    com.v2ray.ang.srvx.SrvxHaptics.error(this@SrvxLoginActivity)
+                    Toast.makeText(this@SrvxLoginActivity,
+                        "خطا در اتصال به سرور کلودفلر — لطفاً اینترنت را بررسی کنید", Toast.LENGTH_LONG).show()
+                    cardGuestMode.isEnabled = true
+                    cardGuestMode.alpha = 1f
+                    progress.visibility = View.GONE
+                }
+            }
         }
 
         // Open Aether Settings
