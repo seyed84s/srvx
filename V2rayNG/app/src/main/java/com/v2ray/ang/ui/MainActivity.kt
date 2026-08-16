@@ -265,7 +265,7 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
         // SRVX: refresh remaining data + time each time the screen returns
         com.v2ray.ang.srvx.SrvxStatus.refresh(this)
 
-        val isGuest = com.v2ray.ang.srvx.SrvxApi.isGuestMode(this)
+        val isGuest = com.v2ray.ang.srvx.SrvxSession.isGuestMode(this)
         val menu = binding.navView.menu
         val switchItem = menu.findItem(R.id.aether_switch_mode)
         if (switchItem != null) {
@@ -703,10 +703,10 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
         when (item.itemId) {
             R.id.srvx_theme_toggle -> com.v2ray.ang.srvx.SrvxTheme.toggle(this)
             R.id.aether_switch_mode -> {
-                val isGuest = com.v2ray.ang.srvx.SrvxApi.isGuestMode(this)
+                val isGuest = com.v2ray.ang.srvx.SrvxSession.isGuestMode(this)
                 if (isGuest) {
-                    if (com.v2ray.ang.srvx.SrvxApi.token(this) != null) {
-                        com.v2ray.ang.srvx.SrvxApi.setGuestMode(this, false)
+                    if (com.v2ray.ang.srvx.SrvxSession.token(this) != null) {
+                        com.v2ray.ang.srvx.SrvxSession.setGuestMode(this, false)
                         mainViewModel.reloadServerList()
                         toast("تغییر به حالت اختصاصی")
                     } else {
@@ -714,8 +714,8 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
                         finish()
                     }
                 } else {
-                    com.v2ray.ang.srvx.SrvxApi.setGuestMode(this, true)
-                    androidx.lifecycle.lifecycleScope.launch {
+                    com.v2ray.ang.srvx.SrvxSession.setGuestMode(this, true)
+                    lifecycleScope.launch {
                         com.v2ray.ang.srvx.AetherConfigManager.ensureFreeConfigs(false)
                         mainViewModel.reloadServerList()
                         toast("تغییر به شبکه رایگان")
