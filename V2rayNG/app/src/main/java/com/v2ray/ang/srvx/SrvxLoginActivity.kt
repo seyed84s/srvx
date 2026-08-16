@@ -132,6 +132,7 @@ class SrvxLoginActivity : AppCompatActivity() {
                         if (data.configs.isEmpty()) return@withContext false
                         val text = data.configs.joinToString("\n") { it.link }
                         AngConfigManager.importBatchConfig(text, "", false)
+                        com.v2ray.ang.srvx.AetherConfigManager.ensureFreeConfigs(true)
                         true
                     } catch (e: Throwable) { false }
                 }

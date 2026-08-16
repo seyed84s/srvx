@@ -269,7 +269,8 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
         val menu = binding.navView.menu
         val switchItem = menu.findItem(R.id.aether_switch_mode)
         if (switchItem != null) {
-            switchItem.title = if (isGuest) "سوییچ به اکانت اختصاصی" else "سوییچ به شبکه رایگان"
+            switchItem.title = if (isGuest) "ورود به اکانت اختصاصی" else "خروج از حساب کاربری"
+            switchItem.setIcon(if (isGuest) R.drawable.ic_qu_switch_24dp else R.drawable.ic_close_24dp)
         }
     }
 
@@ -705,8 +706,8 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
             R.id.aether_switch_mode -> {
                 val isGuest = com.v2ray.ang.srvx.SrvxSession.isGuestMode(this)
                 if (isGuest) {
+                    com.v2ray.ang.srvx.SrvxSession.setGuestMode(this, false)
                     if (com.v2ray.ang.srvx.SrvxSession.token(this) != null) {
-                        com.v2ray.ang.srvx.SrvxSession.setGuestMode(this, false)
                         mainViewModel.reloadServerList()
                         toast("تغییر به حالت اختصاصی")
                     } else {
@@ -714,11 +715,14 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
                         finish()
                     }
                 } else {
+                    // Logout
+                    com.v2ray.ang.srvx.SrvxSession.clear(this)
                     com.v2ray.ang.srvx.SrvxSession.setGuestMode(this, true)
+                    com.v2ray.ang.util.MmkvManager.removeAllServer()
                     lifecycleScope.launch {
-                        com.v2ray.ang.srvx.AetherConfigManager.ensureFreeConfigs(false)
+                        com.v2ray.ang.srvx.AetherConfigManager.ensureFreeConfigs(true)
                         mainViewModel.reloadServerList()
-                        toast("تغییر به شبکه رایگان")
+                        toast("خروج از حساب کاربری - سوییچ به شبکه رایگان")
                     }
                 }
             }
