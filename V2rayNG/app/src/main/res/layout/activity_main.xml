@@ -201,15 +201,16 @@
                                 android:gravity="center"
                                 android:orientation="vertical"
                                 android:paddingStart="16dp"
-                                android:paddingTop="18dp"
+                                android:paddingTop="22dp"
                                 android:paddingEnd="16dp"
-                                android:paddingBottom="16dp">
+                                android:paddingBottom="18dp">
 
                                 <!-- Circular Connect Button with Clean Spacing -->
                                 <FrameLayout
                                     android:id="@+id/srvx_hero_connect_btn"
                                     android:layout_width="78dp"
                                     android:layout_height="78dp"
+                                    android:layout_marginTop="2dp"
                                     android:background="@drawable/srvx_connect_btn_inactive"
                                     android:clickable="true"
                                     android:focusable="true">

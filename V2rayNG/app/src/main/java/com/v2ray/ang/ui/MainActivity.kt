@@ -209,7 +209,7 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
             binding.srvxHeroConnectBtn.setBackgroundResource(R.drawable.srvx_connect_btn_connecting)
             binding.srvxHeroPowerIcon.setImageResource(R.drawable.srvx_ic_power)
             binding.srvxHeroPowerIcon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.md_theme_onPrimaryContainer))
-            binding.srvxHeroConnectBtn.animate().scaleX(0.94f).scaleY(0.94f).setDuration(150).start()
+            binding.srvxHeroConnectBtn.animate().scaleX(0.95f).scaleY(0.95f).setDuration(120).start()
             binding.tvTestState.text = "در حال اتصال به اینترنت امن..."
             binding.tvTestState.setTextColor(ContextCompat.getColor(this, R.color.srvx_gold))
             return
@@ -220,11 +220,11 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
             binding.fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.color_fab_active))
             binding.fab.contentDescription = getString(R.string.action_stop_service)
 
-            // Hero centerpiece connected state
+            // Hero centerpiece connected state - smooth bounce back to exact 1.0f scale
             binding.srvxHeroConnectBtn.setBackgroundResource(R.drawable.srvx_connect_btn_active)
             binding.srvxHeroPowerIcon.setImageResource(R.drawable.srvx_ic_shield)
             binding.srvxHeroPowerIcon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorWhite))
-            binding.srvxHeroConnectBtn.animate().scaleX(1.05f).scaleY(1.05f).setDuration(250).start()
+            binding.srvxHeroConnectBtn.animate().scaleX(1.0f).scaleY(1.0f).setDuration(150).start()
 
             binding.tvTestState.text = "متصل شد — اینترنت امن و پرسرعت"
             binding.tvTestState.setTextColor(ContextCompat.getColor(this, R.color.srvx_emerald))
@@ -242,7 +242,7 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
             binding.srvxHeroConnectBtn.setBackgroundResource(R.drawable.srvx_connect_btn_inactive)
             binding.srvxHeroPowerIcon.setImageResource(R.drawable.srvx_ic_power)
             binding.srvxHeroPowerIcon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.srvx_text_primary))
-            binding.srvxHeroConnectBtn.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
+            binding.srvxHeroConnectBtn.animate().scaleX(1.0f).scaleY(1.0f).setDuration(150).start()
 
             binding.tvTestState.text = "قطع — برای برقراری اتصال لمس کنید"
             binding.tvTestState.setTextColor(ContextCompat.getColor(this, R.color.srvx_text_secondary))
