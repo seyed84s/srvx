@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_srvx_theme_24dp"
             android:title="@string/srvx_theme_toggle" />
         <item
+            android:id="@+id/aether_switch_mode"
+            android:icon="@drawable/ic_autorenew_black_24dp"
+            android:title="تغییر حالت (رایگان / اختصاصی)" />
+        <item
             android:id="@+id/aether_settings"
             android:icon="@drawable/srvx_ic_shield"
             android:title="تنظیمات و لایسنس Aether" />

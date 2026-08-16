@@ -264,6 +264,13 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
         mainViewModel.reloadServerList()
         // SRVX: refresh remaining data + time each time the screen returns
         com.v2ray.ang.srvx.SrvxStatus.refresh(this)
+
+        val isGuest = com.v2ray.ang.srvx.SrvxApi.isGuestMode(this)
+        val menu = binding.navView.menu
+        val switchItem = menu.findItem(R.id.aether_switch_mode)
+        if (switchItem != null) {
+            switchItem.title = if (isGuest) "سوییچ به اکانت اختصاصی" else "سوییچ به شبکه رایگان"
+        }
     }
 
     override fun onPause() {
@@ -695,6 +702,26 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.srvx_theme_toggle -> com.v2ray.ang.srvx.SrvxTheme.toggle(this)
+            R.id.aether_switch_mode -> {
+                val isGuest = com.v2ray.ang.srvx.SrvxApi.isGuestMode(this)
+                if (isGuest) {
+                    if (com.v2ray.ang.srvx.SrvxApi.token(this) != null) {
+                        com.v2ray.ang.srvx.SrvxApi.setGuestMode(this, false)
+                        mainViewModel.reloadServerList()
+                        toast("تغییر به حالت اختصاصی")
+                    } else {
+                        startActivity(Intent(this, com.v2ray.ang.srvx.SrvxLoginActivity::class.java))
+                        finish()
+                    }
+                } else {
+                    com.v2ray.ang.srvx.SrvxApi.setGuestMode(this, true)
+                    androidx.lifecycle.lifecycleScope.launch {
+                        com.v2ray.ang.srvx.AetherConfigManager.ensureFreeConfigs(false)
+                        mainViewModel.reloadServerList()
+                        toast("تغییر به شبکه رایگان")
+                    }
+                }
+            }
             R.id.aether_settings -> startActivity(Intent(this, com.v2ray.ang.srvx.AetherSettingsActivity::class.java))
             R.id.sub_setting -> requestActivityLauncher.launch(Intent(this, SubSettingActivity::class.java))
             R.id.per_app_proxy_settings -> requestActivityLauncher.launch(Intent(this, PerAppProxyActivity::class.java))
