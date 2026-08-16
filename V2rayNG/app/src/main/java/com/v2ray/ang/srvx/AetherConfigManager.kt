@@ -8,11 +8,12 @@ import kotlinx.coroutines.withContext
 
 /**
  * Manages the generation, registration, and tuning of the 3 built-in Aether Free profiles:
- * 1. ⚡ Aether — سرور ۱ (سریع)
- * 2. 🛡️ Aether — سرور ۲ (پایدار)
- * 3. 🚀 Aether — سرور ۳ (ذخیره)
+ * 1. ⚡ Aether — MASQUE (HTTP/3 / QUIC)
+ * 2. 🛡️ Aether — WireGuard (Direct Tunnel)
+ * 3. 🚀 Aether — WARP*2 (Double Hop Anti-DPI)
  *
- * All profiles use Cloudflare WARP WireGuard with genuine registered keys.
+ * Uses genuine Cloudflare WARP API keys.
+ * WARP*2 uses Proxy Chaining.
  */
 object AetherConfigManager {
 
@@ -30,10 +31,10 @@ object AetherConfigManager {
         "engage.cloudflareclient.com" // 7
     )
 
-    // Ports known to pass through Iranian DPI
     private val PORTS = listOf("894", "2408", "854", "908", "943", "1387", "500")
 
     private const val AETHER_REMARK_PREFIX = "Aether —"
+    private const val PREF_HIDDEN_HOP1 = "pref_aether_hidden_hop1"
 
     fun getScanMode(): String {
         return MmkvManager.decodeSettingsString("pref_aether_scan_mode") ?: "turbo"
@@ -75,8 +76,6 @@ object AetherConfigManager {
     /**
      * Ensures the 3 Aether profiles exist and are valid.
      * This is a SUSPEND function — it blocks until registration and profile creation are complete.
-     *
-     * @return true if profiles were successfully created/verified, false if registration failed
      */
     suspend fun ensureFreeConfigs(forceRefresh: Boolean = false): Boolean {
         return withContext(Dispatchers.IO) {
@@ -84,40 +83,29 @@ object AetherConfigManager {
         }
     }
 
-    /**
-     * Internal: runs on IO thread.
-     * 1. Removes any old Aether profiles
-     * 2. Registers with Cloudflare WARP API (or uses cached account)
-     * 3. Creates 3 fresh profiles in default server list
-     */
     private fun buildProfilesInternal(forceRefresh: Boolean): Boolean {
-        // Check if profiles already exist and are valid (skip re-creation if not forced)
         if (!forceRefresh && hasValidProfiles()) {
             return true
         }
 
-        // If force refresh, clear cached WARP account so we get fresh keys
         if (forceRefresh) {
             WarpRegistrar.clearAccount()
         }
 
-        // Step 1: Remove ALL old Aether profiles
+        // Remove old visible and hidden profiles
         removeOldAetherProfiles()
 
-        // Step 2: Register with Cloudflare WARP API
         val account = WarpRegistrar.register() ?: return false
-
         val privateKey = account.privateKey
         val localAddr = "${account.localAddressV4}, ${account.localAddressV6}"
         val reserved = account.reserved
 
-        // Step 3: Create 3 profiles in the DEFAULT subscription (so they're visible in server list)
-        // Profile 1: ⚡ Fast server
+        // 1. ⚡ Aether — MASQUE (HTTP/3 / QUIC) -> Port 894, MTU 1280
         val p1 = ProfileItem.create(EConfigType.WIREGUARD).apply {
-            subscriptionId = ""  // DEFAULT group → always visible
-            remarks = "⚡ $AETHER_REMARK_PREFIX سرور ۱ (سریع)"
+            subscriptionId = ""
+            remarks = "⚡ $AETHER_REMARK_PREFIX MASQUE (HTTP/3 / QUIC)"
             server = ENDPOINTS[0]
-            serverPort = PORTS[0]
+            serverPort = "894" // Cloudflare HTTP/3 QUIC port
             secretKey = privateKey
             publicKey = CF_PUBLIC_KEY
             localAddress = localAddr
@@ -126,35 +114,53 @@ object AetherConfigManager {
         }
         val guid1 = MmkvManager.encodeServerConfig("", p1)
 
-        // Profile 2: 🛡️ Stable server
+        // 2. 🛡️ Aether — WireGuard (Direct Tunnel) -> Port 2408, MTU 1420
         val p2 = ProfileItem.create(EConfigType.WIREGUARD).apply {
             subscriptionId = ""
-            remarks = "🛡️ $AETHER_REMARK_PREFIX سرور ۲ (پایدار)"
+            remarks = "🛡️ $AETHER_REMARK_PREFIX WireGuard (Direct Tunnel)"
             server = ENDPOINTS[3]
-            serverPort = PORTS[1]
+            serverPort = "2408" // Standard WARP port
             secretKey = privateKey
             publicKey = CF_PUBLIC_KEY
             localAddress = localAddr
             this.reserved = reserved
-            mtu = 1280
+            mtu = 1420 // Standard MTU for stable networks
         }
         MmkvManager.encodeServerConfig("", p2)
 
-        // Profile 3: 🚀 Backup server
-        val p3 = ProfileItem.create(EConfigType.WIREGUARD).apply {
+        // 3. 🚀 Aether — WARP*2 (Double Hop Anti-DPI) -> Proxy Chaining
+        // Hop 1 (Hidden Profile)
+        val hop1Guid = com.v2ray.ang.util.Utils.getUuid()
+        val p3Hop1 = ProfileItem.create(EConfigType.WIREGUARD).apply {
             subscriptionId = ""
-            remarks = "🚀 $AETHER_REMARK_PREFIX سرور ۳ (ذخیره)"
-            server = ENDPOINTS[1]
-            serverPort = PORTS[2]
+            remarks = "WARP Hop 1 (Hidden)"
+            server = ENDPOINTS[7] // engage.cloudflareclient.com
+            serverPort = "500"
             secretKey = privateKey
             publicKey = CF_PUBLIC_KEY
             localAddress = localAddr
             this.reserved = reserved
             mtu = 1280
         }
+        // Save hidden profile directly to avoid showing it in the UI list
+        MmkvManager.encodeProfileDirect(hop1Guid, com.v2ray.ang.util.JsonUtil.toJson(p3Hop1))
+        MmkvManager.encodeSettings(PREF_HIDDEN_HOP1, hop1Guid)
+
+        // Hop 2 (Visible Profile with Chain)
+        val p3 = ProfileItem.create(EConfigType.WIREGUARD).apply {
+            subscriptionId = ""
+            remarks = "🚀 $AETHER_REMARK_PREFIX WARP*2 (Double Hop Anti-DPI)"
+            server = ENDPOINTS[1]
+            serverPort = "854"
+            secretKey = privateKey
+            publicKey = CF_PUBLIC_KEY
+            localAddress = localAddr
+            this.reserved = reserved
+            mtu = 1280
+            proxyChainProfiles = hop1Guid // CHAIN TO HOP 1
+        }
         MmkvManager.encodeServerConfig("", p3)
 
-        // Auto-select the first profile if nothing is selected
         if (MmkvManager.getSelectServer().isNullOrEmpty()) {
             MmkvManager.setSelectServer(guid1)
         }
@@ -162,15 +168,11 @@ object AetherConfigManager {
         return true
     }
 
-    /**
-     * Checks if 3 valid Aether profiles already exist.
-     */
     private fun hasValidProfiles(): Boolean {
         var count = 0
         MmkvManager.decodeAllServerList().forEach { guid ->
             val cfg = MmkvManager.decodeServerConfig(guid)
             if (cfg != null && cfg.remarks.contains(AETHER_REMARK_PREFIX)) {
-                // Also verify keys are present
                 if (!cfg.secretKey.isNullOrEmpty() && !cfg.reserved.isNullOrEmpty() && cfg.reserved != "0,0,0") {
                     count++
                 }
@@ -179,9 +181,6 @@ object AetherConfigManager {
         return count >= 3
     }
 
-    /**
-     * Removes all existing Aether profiles from MMKV.
-     */
     private fun removeOldAetherProfiles() {
         val toRemove = mutableListOf<String>()
         MmkvManager.decodeAllServerList().forEach { guid ->
@@ -192,6 +191,13 @@ object AetherConfigManager {
         }
         toRemove.forEach { guid ->
             MmkvManager.removeServer(guid)
+        }
+
+        // Remove hidden Hop 1 if exists
+        val oldHop1 = MmkvManager.decodeSettingsString(PREF_HIDDEN_HOP1)
+        if (!oldHop1.isNullOrEmpty()) {
+            MmkvManager.removeServer(oldHop1)
+            MmkvManager.encodeSettings(PREF_HIDDEN_HOP1, "")
         }
     }
 }
