@@ -270,7 +270,7 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
         val switchItem = menu.findItem(R.id.aether_switch_mode)
         if (switchItem != null) {
             switchItem.title = if (isGuest) "ورود به اکانت اختصاصی" else "خروج از حساب کاربری"
-            switchItem.setIcon(if (isGuest) R.drawable.ic_qu_switch_24dp else R.drawable.ic_close_24dp)
+            switchItem.setIcon(if (isGuest) R.drawable.ic_qu_switch_24dp else R.drawable.ic_delete_24dp)
         }
     }
 
@@ -718,7 +718,7 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
                     // Logout
                     com.v2ray.ang.srvx.SrvxSession.clear(this)
                     com.v2ray.ang.srvx.SrvxSession.setGuestMode(this, true)
-                    com.v2ray.ang.util.MmkvManager.removeAllServer()
+                    com.v2ray.ang.handler.MmkvManager.removeAllServer()
                     lifecycleScope.launch {
                         com.v2ray.ang.srvx.AetherConfigManager.ensureFreeConfigs(true)
                         mainViewModel.reloadServerList()
