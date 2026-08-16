@@ -232,9 +232,24 @@ object CoreServiceManager {
         val config = MmkvManager.decodeServerConfig(guid) ?: error("Failed to decode server config")
 
         LogUtil.i(AppConfig.TAG, "StartCore-Manager: Starting core loop for ${config.remarks}")
+
+        // Start Aether Engine if this is an Aether profile
+        if (config.remarks.contains(com.v2ray.ang.srvx.AetherConfigManager.AETHER_REMARK_PREFIX)) {
+            val mode = when {
+                config.remarks.contains("MASQUE") -> "masque"
+                config.remarks.contains("WARP*2") -> "gool"
+                else -> "wg"
+            }
+            com.v2ray.ang.srvx.AetherEngine.start(
+                service,
+                mode
+            )
+        }
+
         val result = CoreConfigManager.getV2rayConfig(service, guid)
         LogUtil.d(AppConfig.TAG, result.content)
         if (!result.status) {
+            com.v2ray.ang.srvx.AetherEngine.stop()
             error(result.errorMessage.ifBlank { "Failed to get V2Ray config" })
         }
 
@@ -287,6 +302,8 @@ object CoreServiceManager {
      */
     fun stopCoreLoop(): Boolean {
         val service = getService() ?: return false
+
+        com.v2ray.ang.srvx.AetherEngine.stop()
 
         if (coreController.isRunning) {
             CoroutineScope(Dispatchers.IO).launch {
