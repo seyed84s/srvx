@@ -261,6 +261,7 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
 
     override fun onResume() {
         super.onResume()
+        mainViewModel.reloadServerList()
         // SRVX: refresh remaining data + time each time the screen returns
         com.v2ray.ang.srvx.SrvxStatus.refresh(this)
     }
@@ -694,6 +695,7 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.srvx_theme_toggle -> com.v2ray.ang.srvx.SrvxTheme.toggle(this)
+            R.id.aether_settings -> startActivity(Intent(this, com.v2ray.ang.srvx.AetherSettingsActivity::class.java))
             R.id.sub_setting -> requestActivityLauncher.launch(Intent(this, SubSettingActivity::class.java))
             R.id.per_app_proxy_settings -> requestActivityLauncher.launch(Intent(this, PerAppProxyActivity::class.java))
             R.id.routing_setting -> requestActivityLauncher.launch(Intent(this, RoutingSettingActivity::class.java))

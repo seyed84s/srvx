@@ -22,8 +22,8 @@ class SrvxLoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Already logged in -> straight to main (configs were imported at first login)
-        if (SrvxSession.token(this) != null) {
+        // Already logged in or guest mode -> straight to main
+        if (SrvxSession.hasSession(this)) {
             goMain()
             return
         }
@@ -34,6 +34,8 @@ class SrvxLoginActivity : AppCompatActivity() {
         val title = findViewById<View>(R.id.srvx_title)
         val subtitle = findViewById<View>(R.id.srvx_subtitle)
         val cardLogin = findViewById<View>(R.id.card_login)
+        val cardGuestMode = findViewById<View>(R.id.card_guest_mode)
+        val btnAetherSettings = findViewById<View>(R.id.srvx_btn_aether_settings)
         val userField = findViewById<EditText>(R.id.srvx_username)
         val passField = findViewById<EditText>(R.id.srvx_password)
         val errorText = findViewById<TextView>(R.id.srvx_error)
@@ -41,14 +43,31 @@ class SrvxLoginActivity : AppCompatActivity() {
         val progress = findViewById<ProgressBar>(R.id.srvx_progress)
 
         // Entrance animation
-        listOf(logo, title, subtitle, cardLogin).forEach {
+        listOf(logo, title, subtitle, cardLogin, cardGuestMode, btnAetherSettings).forEach {
             it?.alpha = 0f
             it?.translationY = 30f
         }
         logo?.animate()?.alpha(1f)?.translationY(0f)?.setDuration(500)?.setInterpolator(DecelerateInterpolator())?.start()
         title?.animate()?.alpha(1f)?.translationY(0f)?.setDuration(500)?.setStartDelay(100)?.setInterpolator(DecelerateInterpolator())?.start()
         subtitle?.animate()?.alpha(1f)?.translationY(0f)?.setDuration(500)?.setStartDelay(150)?.setInterpolator(DecelerateInterpolator())?.start()
-        cardLogin?.animate()?.alpha(1f)?.translationY(0f)?.setDuration(600)?.setStartDelay(250)?.setInterpolator(DecelerateInterpolator())?.start()
+        cardLogin?.animate()?.alpha(1f)?.translationY(0f)?.setDuration(600)?.setStartDelay(200)?.setInterpolator(DecelerateInterpolator())?.start()
+        cardGuestMode?.animate()?.alpha(1f)?.translationY(0f)?.setDuration(600)?.setStartDelay(300)?.setInterpolator(DecelerateInterpolator())?.start()
+        btnAetherSettings?.animate()?.alpha(1f)?.translationY(0f)?.setDuration(600)?.setStartDelay(400)?.setInterpolator(DecelerateInterpolator())?.start()
+
+        // Guest Mode (Free Aether Network)
+        cardGuestMode?.setOnClickListener {
+            com.v2ray.ang.srvx.SrvxHaptics.success(this)
+            SrvxSession.setGuestMode(this, true)
+            AetherConfigManager.ensureFreeConfigs()
+            Toast.makeText(this, "ورود به شبکه رایگان Aether با اسکن توربو 🌐⚡", Toast.LENGTH_SHORT).show()
+            goMain()
+        }
+
+        // Open Aether Settings
+        btnAetherSettings?.setOnClickListener {
+            com.v2ray.ang.srvx.SrvxHaptics.click(this, btnAetherSettings)
+            startActivity(Intent(this, AetherSettingsActivity::class.java))
+        }
 
         loginBtn.setOnClickListener {
             com.v2ray.ang.srvx.SrvxHaptics.click(this, loginBtn)

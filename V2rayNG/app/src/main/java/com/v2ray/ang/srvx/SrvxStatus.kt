@@ -23,6 +23,25 @@ object SrvxStatus {
         val dataView = activity.findViewById<TextView>(R.id.srvx_data_value) ?: return
         val timeView = activity.findViewById<TextView>(R.id.srvx_time_value) ?: return
         val refreshBtn = activity.findViewById<ImageView>(R.id.srvx_btn_refresh_status)
+
+        // If in Guest Mode (Free Aether)
+        if (SrvxSession.isGuestMode(activity)) {
+            dataView.text = "نامحدود"
+            timeView.text = if (AetherConfigManager.hasDedicatedLicense()) "WARP+ فعال 💎" else "رایگان Aether 🌐"
+            if (refreshBtn != null) {
+                val rotate = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f).apply {
+                    duration = 500
+                    repeatCount = 0
+                }
+                refreshBtn.startAnimation(rotate)
+                refreshBtn.setOnClickListener {
+                    AetherConfigManager.ensureFreeConfigs(forceRefresh = true)
+                    refresh(activity)
+                }
+            }
+            return
+        }
+
         val token = SrvxSession.token(activity) ?: return
 
         // Rotate animation on refresh icon

@@ -107,14 +107,36 @@ object SrvxApi {
 
 object SrvxSession {
     private const val PREF = "srvx_session"
+
     fun save(ctx: Context, token: String, username: String) {
         ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE).edit()
-            .putString("token", token).putString("username", username).apply()
+            .putString("token", token)
+            .putString("username", username)
+            .putBoolean("is_guest", false)
+            .apply()
     }
+
+    fun setGuestMode(ctx: Context, isGuest: Boolean) {
+        ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE).edit()
+            .putBoolean("is_guest", isGuest)
+            .apply()
+    }
+
+    fun isGuestMode(ctx: Context): Boolean =
+        ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE).getBoolean("is_guest", false)
+
     fun token(ctx: Context): String? =
         ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE).getString("token", null)
+
     fun username(ctx: Context): String? =
         ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE).getString("username", null)
+
+    fun isLoggedIn(ctx: Context): Boolean =
+        token(ctx) != null && !isGuestMode(ctx)
+
+    fun hasSession(ctx: Context): Boolean =
+        isLoggedIn(ctx) || isGuestMode(ctx)
+
     fun clear(ctx: Context) {
         ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE).edit().clear().apply()
     }
