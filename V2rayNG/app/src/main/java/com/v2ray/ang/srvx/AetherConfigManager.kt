@@ -110,48 +110,45 @@ object AetherConfigManager {
         val port = TURBO_PORTS.first()
 
         // 1. ⚡ Aether — MASQUE
-        val masqueProfile = ProfileItem(
-            configType = EConfigType.WIREGUARD,
-            subscriptionId = SUB_ID_AETHER,
-            remarks = "⚡ Aether — MASQUE (HTTP/3 / QUIC)",
-            server = endpoint,
-            serverPort = "894",
-            secretKey = privateKey,
-            publicKey = CF_PUBLIC_KEY,
-            localAddress = "172.16.0.2/32, 2606:4700:110:87e5:24e7:7fef:a1c1:5a4a/128",
-            reserved = "0,0,0",
+        val masqueProfile = ProfileItem.create(EConfigType.WIREGUARD).apply {
+            subscriptionId = SUB_ID_AETHER
+            remarks = "⚡ Aether — MASQUE (HTTP/3 / QUIC)"
+            server = endpoint
+            serverPort = "894"
+            secretKey = privateKey
+            publicKey = CF_PUBLIC_KEY
+            localAddress = "172.16.0.2/32, 2606:4700:110:87e5:24e7:7fef:a1c1:5a4a/128"
+            reserved = "0,0,0"
             mtu = 1280
-        )
+        }
         val masqueGuid = MmkvManager.encodeServerConfig("", masqueProfile)
 
         // 2. 🛡️ Aether — WireGuard
-        val wgProfile = ProfileItem(
-            configType = EConfigType.WIREGUARD,
-            subscriptionId = SUB_ID_AETHER,
-            remarks = "🛡️ Aether — WireGuard (Direct Tunnel)",
-            server = TURBO_ENDPOINTS[1],
-            serverPort = "2408",
-            secretKey = privateKey,
-            publicKey = CF_PUBLIC_KEY,
-            localAddress = "172.16.0.2/32, 2606:4700:110:87e5:24e7:7fef:a1c1:5a4a/128",
-            reserved = "0,0,0",
+        val wgProfile = ProfileItem.create(EConfigType.WIREGUARD).apply {
+            subscriptionId = SUB_ID_AETHER
+            remarks = "🛡️ Aether — WireGuard (Direct Tunnel)"
+            server = TURBO_ENDPOINTS[1]
+            serverPort = "2408"
+            secretKey = privateKey
+            publicKey = CF_PUBLIC_KEY
+            localAddress = "172.16.0.2/32, 2606:4700:110:87e5:24e7:7fef:a1c1:5a4a/128"
+            reserved = "0,0,0"
             mtu = 1420
-        )
+        }
         val wgGuid = MmkvManager.encodeServerConfig("", wgProfile)
 
         // 3. 🚀 Aether — WARP*2
-        val warp2Profile = ProfileItem(
-            configType = EConfigType.WIREGUARD,
-            subscriptionId = SUB_ID_AETHER,
-            remarks = "🚀 Aether — WARP*2 (Double Hop Anti-DPI)",
-            server = TURBO_ENDPOINTS[2],
-            serverPort = "500",
-            secretKey = privateKey,
-            publicKey = CF_PUBLIC_KEY,
-            localAddress = "172.16.0.2/32, 2606:4700:110:87e5:24e7:7fef:a1c1:5a4a/128",
-            reserved = "0,0,0",
+        val warp2Profile = ProfileItem.create(EConfigType.WIREGUARD).apply {
+            subscriptionId = SUB_ID_AETHER
+            remarks = "🚀 Aether — WARP*2 (Double Hop Anti-DPI)"
+            server = TURBO_ENDPOINTS[2]
+            serverPort = "500"
+            secretKey = privateKey
+            publicKey = CF_PUBLIC_KEY
+            localAddress = "172.16.0.2/32, 2606:4700:110:87e5:24e7:7fef:a1c1:5a4a/128"
+            reserved = "0,0,0"
             mtu = 1280
-        )
+        }
         val warp2Guid = MmkvManager.encodeServerConfig("", warp2Profile)
 
         // Select the fastest MASQUE profile as default if none selected
