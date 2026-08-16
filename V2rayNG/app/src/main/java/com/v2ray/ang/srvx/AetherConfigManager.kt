@@ -1,10 +1,11 @@
 package com.v2ray.ang.srvx
 
-import android.content.Context
 import com.v2ray.ang.dto.entities.ProfileItem
 import com.v2ray.ang.enums.EConfigType
 import com.v2ray.ang.handler.MmkvManager
-import java.security.SecureRandom
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Manages the generation, registration, and tuning of the 3 built-in Aether Free profiles:
@@ -30,7 +31,7 @@ object AetherConfigManager {
     )
 
     val TURBO_PORTS = listOf(
-        "894", "2408", "500", "854", "890", "908", "943", "988", "1074", "1387", "1701", "3476", "5060"
+        "894", "2408", "854", "908", "943", "988", "1074", "1387", "1701", "500", "3476", "5060"
     )
 
     fun getScanMode(): String {
@@ -70,20 +71,7 @@ object AetherConfigManager {
     }
 
     /**
-     * Generates a random Curve25519 private key in base64.
-     */
-    private fun generatePrivateKey(): String {
-        val random = SecureRandom()
-        val key = ByteArray(32)
-        random.nextBytes(key)
-        key[0] = (key[0].toInt() and 248).toByte()
-        key[31] = (key[31].toInt() and 127).toByte()
-        key[31] = (key[31].toInt() or 64).toByte()
-        return android.util.Base64.encodeToString(key, android.util.Base64.NO_WRAP)
-    }
-
-    /**
-     * Ensures that the 3 free Aether profiles exist in MMKV and are up to date.
+     * Ensures that the 3 free Aether profiles exist in MMKV and are registered with Cloudflare.
      */
     fun ensureFreeConfigs(forceRefresh: Boolean = false) {
         val allServerGuids = MmkvManager.decodeAllServerList()
@@ -105,20 +93,28 @@ object AetherConfigManager {
             return
         }
 
-        val privateKey = generatePrivateKey()
-        val endpoint = TURBO_ENDPOINTS.first()
-        val port = TURBO_PORTS.first()
+        // Register / Retrieve genuine Cloudflare WARP account
+        CoroutineScope(Dispatchers.IO).launch {
+            buildProfilesInternal()
+        }
+    }
+
+    fun buildProfilesInternal() {
+        val account = WarpRegistrar.register()
+        val privateKey = account.privateKey
+        val localAddr = "${account.localAddressV4}, ${account.localAddressV6}"
+        val reserved = account.reserved
 
         // 1. ⚡ Aether — MASQUE
         val masqueProfile = ProfileItem.create(EConfigType.WIREGUARD).apply {
             subscriptionId = SUB_ID_AETHER
             remarks = "⚡ Aether — MASQUE (HTTP/3 / QUIC)"
-            server = endpoint
+            server = TURBO_ENDPOINTS[0] // 162.159.192.1
             serverPort = "894"
             secretKey = privateKey
             publicKey = CF_PUBLIC_KEY
-            localAddress = "172.16.0.2/32, 2606:4700:110:87e5:24e7:7fef:a1c1:5a4a/128"
-            reserved = "0,0,0"
+            localAddress = localAddr
+            this.reserved = reserved
             mtu = 1280
         }
         val masqueGuid = MmkvManager.encodeServerConfig("", masqueProfile)
@@ -127,12 +123,12 @@ object AetherConfigManager {
         val wgProfile = ProfileItem.create(EConfigType.WIREGUARD).apply {
             subscriptionId = SUB_ID_AETHER
             remarks = "🛡️ Aether — WireGuard (Direct Tunnel)"
-            server = TURBO_ENDPOINTS[1]
+            server = TURBO_ENDPOINTS[3] // 188.114.96.1
             serverPort = "2408"
             secretKey = privateKey
             publicKey = CF_PUBLIC_KEY
-            localAddress = "172.16.0.2/32, 2606:4700:110:87e5:24e7:7fef:a1c1:5a4a/128"
-            reserved = "0,0,0"
+            localAddress = localAddr
+            this.reserved = reserved
             mtu = 1420
         }
         val wgGuid = MmkvManager.encodeServerConfig("", wgProfile)
@@ -141,12 +137,12 @@ object AetherConfigManager {
         val warp2Profile = ProfileItem.create(EConfigType.WIREGUARD).apply {
             subscriptionId = SUB_ID_AETHER
             remarks = "🚀 Aether — WARP*2 (Double Hop Anti-DPI)"
-            server = TURBO_ENDPOINTS[2]
-            serverPort = "500"
+            server = TURBO_ENDPOINTS[1] // 162.159.193.1
+            serverPort = "854"
             secretKey = privateKey
             publicKey = CF_PUBLIC_KEY
-            localAddress = "172.16.0.2/32, 2606:4700:110:87e5:24e7:7fef:a1c1:5a4a/128"
-            reserved = "0,0,0"
+            localAddress = localAddr
+            this.reserved = reserved
             mtu = 1280
         }
         val warp2Guid = MmkvManager.encodeServerConfig("", warp2Profile)
