@@ -53,7 +53,7 @@ object CoreServiceManager {
             field = value
             val service = value?.get()?.getService()
             CoreNativeManager.initCoreEnv(service)
-            if (service != null && processFinder == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (service != null && processFinder == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && SettingsManager.canUseProcessRouting()) {
                 processFinder = XrayProcessFinder(service)
                 coreController.registerProcessFinder(processFinder)
             }
@@ -445,10 +445,13 @@ object CoreServiceManager {
      */
     private class XrayProcessFinder(context: Context) : ProcessFinder {
         private val cm: ConnectivityManager? = context.getSystemService(ConnectivityManager::class.java)
+        private val uidCache = androidx.collection.LruCache<Long, Long>(128)
 
         override fun findProcessByConnection(network: String, srcIP: String, srcPort: Long, destIP: String, destPort: Long): Long {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) return -1L
-            if (cm == null) return -1L
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || cm == null) return -1L
+            val cachedUid = uidCache.get(srcPort)
+            if (cachedUid != null) return cachedUid
+
             val proto = when (network) {
                 "tcp" -> OsConstants.IPPROTO_TCP
                 "udp" -> OsConstants.IPPROTO_UDP
@@ -456,7 +459,6 @@ object CoreServiceManager {
             }
 
             if (destIP.isBlank() || destPort == 0L) {
-                LogUtil.d(AppConfig.TAG, "ProcessFinder: Find $network connection from $srcIP:$srcPort to :$destPort, (no dest)")
                 return -1L
             }
 
@@ -466,9 +468,9 @@ object CoreServiceManager {
                     InetSocketAddress(srcIP, srcPort.toInt()),
                     InetSocketAddress(destIP, destPort.toInt())
                 ).toLong()
-                LogUtil.d(AppConfig.TAG, "ProcessFinder: Find $network connection from $srcIP:$srcPort to $destIP:$destPort, uid=$uid")
-                //LogUtil.d(AppConfig.TAG, "ProcessFinder: Find $network connection from $srcIP:$srcPort to $destIP:$destPort, uid=$uid,${PackageUidResolver.uidToPackageName(uid.toString())}")
-
+                if (uid > 0L) {
+                    uidCache.put(srcPort, uid)
+                }
                 uid
             } catch (_: Exception) {
                 -1L

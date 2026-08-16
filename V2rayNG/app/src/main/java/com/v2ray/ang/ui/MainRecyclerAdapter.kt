@@ -66,8 +66,8 @@ class MainRecyclerAdapter(
                 if (isSelected) R.drawable.srvx_radio_active else R.drawable.srvx_radio_inactive
             )
 
-            // Name & address
-            holder.itemMainBinding.tvName.text = profile.remarks
+            // Name with country flag & address
+            holder.itemMainBinding.tvName.text = com.v2ray.ang.srvx.CountryFlagUtil.formatRemarksWithFlag(profile.remarks, profile.server)
             holder.itemMainBinding.tvStatistics.text = getAddress(profile)
             holder.itemMainBinding.tvType.text = getProtocolDescription(profile)
 
@@ -98,8 +98,9 @@ class MainRecyclerAdapter(
                 holder.itemMainBinding.tvTestResult.setTextColor(ContextCompat.getColor(context, R.color.colorPingRed))
             }
 
-            // Click listener on entire card
+            // Click listener with tactile haptic feedback
             holder.itemMainBinding.cardItem.setOnClickListener {
+                com.v2ray.ang.srvx.SrvxHaptics.tick(context, holder.itemMainBinding.cardItem)
                 adapterListener?.onSelectServer(guid)
             }
         }

@@ -52,7 +52,8 @@ object NotificationManager {
         speedNotificationJob = CoroutineScope(Dispatchers.IO).launch {
             while (isActive) {
                 lastZeroSpeed = updateSpeedNotificationOnce(lastZeroSpeed)
-                delay(QUERY_INTERVAL_MS)
+                val delayTime = if (lastZeroSpeed) QUERY_INTERVAL_MS * 2 else QUERY_INTERVAL_MS
+                delay(delayTime)
             }
         }
     }
@@ -164,19 +165,30 @@ object NotificationManager {
      * @param proxyTraffic The proxy traffic.
      * @param directTraffic The direct traffic.
      */
+    private var lastRenderedText: String? = null
+    private var lastRenderedIcon: Int = 0
+
     private fun updateNotification(contentText: String?, proxyTraffic: Long, directTraffic: Long) {
-        if (mBuilder != null) {
-            if (proxyTraffic < NOTIFICATION_ICON_THRESHOLD && directTraffic < NOTIFICATION_ICON_THRESHOLD) {
-                mBuilder?.setSmallIcon(R.drawable.ic_stat_name)
-            } else if (proxyTraffic > directTraffic) {
-                mBuilder?.setSmallIcon(R.drawable.ic_stat_proxy)
-            } else {
-                mBuilder?.setSmallIcon(R.drawable.ic_stat_direct)
-            }
-            mBuilder?.setStyle(NotificationCompat.BigTextStyle().bigText(contentText))
-            mBuilder?.setContentText(contentText)
-            getNotificationManager()?.notify(NOTIFICATION_ID, mBuilder?.build())
+        val builder = mBuilder ?: return
+        val currentIcon = if (proxyTraffic < NOTIFICATION_ICON_THRESHOLD && directTraffic < NOTIFICATION_ICON_THRESHOLD) {
+            R.drawable.ic_stat_name
+        } else if (proxyTraffic > directTraffic) {
+            R.drawable.ic_stat_proxy
+        } else {
+            R.drawable.ic_stat_direct
         }
+
+        if (lastRenderedText == contentText && lastRenderedIcon == currentIcon) {
+            return
+        }
+
+        lastRenderedText = contentText
+        lastRenderedIcon = currentIcon
+
+        builder.setSmallIcon(currentIcon)
+        builder.setStyle(NotificationCompat.BigTextStyle().bigText(contentText))
+        builder.setContentText(contentText)
+        getNotificationManager()?.notify(NOTIFICATION_ID, builder.build())
     }
 
     /**

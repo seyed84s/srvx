@@ -51,9 +51,11 @@ class SrvxLoginActivity : AppCompatActivity() {
         cardLogin?.animate()?.alpha(1f)?.translationY(0f)?.setDuration(600)?.setStartDelay(250)?.setInterpolator(DecelerateInterpolator())?.start()
 
         loginBtn.setOnClickListener {
+            com.v2ray.ang.srvx.SrvxHaptics.click(this, loginBtn)
             val u = userField.text.toString().trim()
             val p = passField.text.toString()
             if (u.isEmpty() || p.isEmpty()) {
+                com.v2ray.ang.srvx.SrvxHaptics.error(this)
                 errorText.text = "نام کاربری و رمز را وارد کنید"
                 errorText.alpha = 0f
                 errorText.animate().alpha(1f).setDuration(200).start()
@@ -70,6 +72,7 @@ class SrvxLoginActivity : AppCompatActivity() {
                     try { SrvxApi.login(u, p) } catch (e: Throwable) { null }
                 }
                 if (token == null) {
+                    com.v2ray.ang.srvx.SrvxHaptics.error(this@SrvxLoginActivity)
                     progress.visibility = View.GONE
                     loginBtn.text = "ورود به حساب"
                     loginBtn.isEnabled = true
@@ -78,6 +81,7 @@ class SrvxLoginActivity : AppCompatActivity() {
                     errorText.animate().alpha(1f).setDuration(200).start()
                     return@launch
                 }
+                com.v2ray.ang.srvx.SrvxHaptics.success(this@SrvxLoginActivity)
                 SrvxSession.save(this@SrvxLoginActivity, token, u)
 
                 // 2) import this user's configs ONCE, right after login

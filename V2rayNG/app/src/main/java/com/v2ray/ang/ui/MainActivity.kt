@@ -98,12 +98,14 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
         binding.srvxHeroConnectBtn.setOnClickListener { handleFabAction() }
         binding.layoutTest.setOnClickListener { handleLayoutTestClick() }
         binding.btnPingAll.setOnClickListener {
+            com.v2ray.ang.srvx.SrvxHaptics.click(this, binding.btnPingAll)
             if (mainViewModel.serversCache.isNotEmpty()) {
                 toast(getString(R.string.connection_test_testing_count, mainViewModel.serversCache.count()))
                 mainViewModel.testAllRealPing()
             }
         }
         binding.srvxBtnRefreshStatus.setOnClickListener {
+            com.v2ray.ang.srvx.SrvxHaptics.tick(this, binding.srvxBtnRefreshStatus)
             com.v2ray.ang.srvx.SrvxStatus.refresh(this)
         }
 
@@ -147,6 +149,7 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun handleFabAction() {
+        com.v2ray.ang.srvx.SrvxHaptics.heavyClick(this, binding.srvxHeroConnectBtn)
         applyRunningState(isLoading = true, isRunning = false)
 
         if (mainViewModel.isRunning.value == true) {
@@ -164,6 +167,7 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun handleLayoutTestClick() {
+        com.v2ray.ang.srvx.SrvxHaptics.tick(this, binding.layoutTest)
         if (mainViewModel.isRunning.value == true) {
             setTestState(getString(R.string.connection_test_testing))
             binding.tvPingQuickLabel.text = getString(R.string.connection_test_testing)
@@ -216,6 +220,7 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
         }
 
         if (isRunning) {
+            com.v2ray.ang.srvx.SrvxHaptics.success(this)
             binding.fab.setImageResource(R.drawable.ic_stop_24dp)
             binding.fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.color_fab_active))
             binding.fab.contentDescription = getString(R.string.action_stop_service)
