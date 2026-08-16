@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorConfigType">#EBCE8A</color>
+    <color name="colorIndicator">#EBCE8A</color>
+    <color name="colorPing">#00E5A3</color>
+    <color name="colorPingAmber">#FFB800</color>
+    <color name="colorPingRed">#FF5C67</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="color_fab_active">#EBCE8A</color>
+    <color name="color_fab_inactive">#4A5373</color>
+    <color name="divider_color_light">#1E2544</color>
+    <color name="md_theme_background">#090C19</color>
+    <color name="md_theme_error">#FF5C67</color>
+    <color name="md_theme_errorContainer">#630B14</color>
+    <color name="md_theme_inverseOnSurface">#11162B</color>
+    <color name="md_theme_inversePrimary">#C9A24B</color>
+    <color name="md_theme_inverseSurface">#E6E9F5</color>
+    <color name="md_theme_onBackground">#F2F4FD</color>
+    <color name="md_theme_onError">#FFFFFF</color>
+    <color name="md_theme_onErrorContainer">#FFDAD6</color>
+    <color name="md_theme_onPrimary">#1A1400</color>
+    <color name="md_theme_onPrimaryContainer">#FCE8B8</color>
+    <color name="md_theme_onSecondary">#11162B</color>
+    <color name="md_theme_onSecondaryContainer">#DFE4F7</color>
+    <color name="md_theme_onSurface">#F2F4FD</color>
+    <color name="md_theme_onSurfaceVariant">#9DA8CB</color>
+    <color name="md_theme_onTertiary">#003825</color>
+    <color name="md_theme_onTertiaryContainer">#A6FFE1</color>
+    <color name="md_theme_outline">#333F69</color>
+    <color name="md_theme_outlineVariant">#202947</color>
+    <color name="md_theme_primary">#EBCE8A</color>
+    <color name="md_theme_primaryContainer">#382C0E</color>
+    <color name="md_theme_scrim">#000000</color>
+    <color name="md_theme_secondary">#9DA8CB</color>
+    <color name="md_theme_secondaryContainer">#1E274A</color>
+    <color name="md_theme_shadow">#000000</color>
+    <color name="md_theme_surface">#11162B</color>
+    <color name="md_theme_surfaceTint">#EBCE8A</color>
+    <color name="md_theme_surfaceVariant">#18203D</color>
+    <color name="md_theme_tertiary">#00E5A3</color>
+    <color name="md_theme_tertiaryContainer">#005137</color>
+    <color name="srvx_amber">#FFB800</color>
+    <color name="srvx_amber_bg">#332600</color>
+    <color name="srvx_bg">#090C19</color>
+    <color name="srvx_blue">#60A5FA</color>
+    <color name="srvx_blue_bg">#142347</color>
+    <color name="srvx_card_bg">#121830</color>
+    <color name="srvx_card_stroke">#222B4D</color>
+    <color name="srvx_card_stroke_selected">#EBCE8A</color>
+    <color name="srvx_emerald">#00E5A3</color>
+    <color name="srvx_emerald_bg">#0D2B22</color>
+    <color name="srvx_emerald_glow">#4000E5A3</color>
+    <color name="srvx_emerald_light">#5CFFCE</color>
+    <color name="srvx_gold">#EBCE8A</color>
+    <color name="srvx_gold_dark">#C9A24B</color>
+    <color name="srvx_gold_glow">#40EBCE8A</color>
+    <color name="srvx_gold_light">#F6E4B6</color>
+    <color name="srvx_purple">#A78BFA</color>
+    <color name="srvx_purple_bg">#25164A</color>
+    <color name="srvx_red">#FF5C67</color>
+    <color name="srvx_red_bg">#331418</color>
+    <color name="srvx_surface">#11162B</color>
+    <color name="srvx_surface_variant">#18203D</color>
+    <color name="srvx_text_muted">#667299</color>
+    <color name="srvx_text_primary">#F2F4FD</color>
+    <color name="srvx_text_secondary">#9DA8CB</color>
+    <style name="AppThemeDayNight" parent="AppThemeBase">
+        
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+    </style>
+</resources>

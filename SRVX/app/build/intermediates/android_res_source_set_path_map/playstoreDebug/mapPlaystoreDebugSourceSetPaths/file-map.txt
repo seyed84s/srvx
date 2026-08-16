@@ -1,0 +1,11 @@
+com.v2ray.ang.app-playstore-0 C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\build\generated\res\pngs\playstore\debug
+com.v2ray.ang.app-playstore-1 C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\build\generated\res\resValues\playstore\debug
+com.v2ray.ang.app-updated_navigation_xml-2 C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\build\generated\updated_navigation_xml\playstoreDebug
+com.v2ray.ang.app-packagePlaystoreDebugResources-3 C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\build\intermediates\incremental\playstoreDebug\packagePlaystoreDebugResources\merged.dir
+com.v2ray.ang.app-packagePlaystoreDebugResources-4 C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\build\intermediates\incremental\playstoreDebug\packagePlaystoreDebugResources\stripped.dir
+com.v2ray.ang.app-playstoreDebug-5 C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\build\intermediates\merged_res\playstoreDebug\mergePlaystoreDebugResources
+com.v2ray.ang.app-debug-6 C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\debug\res
+com.v2ray.ang.app-main-7 C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\res
+com.v2ray.ang.app-playstore-8 C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\playstore\res
+com.v2ray.ang.app-playstoreDebug-9 C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\playstoreDebug\res
+gradleHome-0 C:\Users\Seyed\.gradle

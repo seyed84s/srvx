@@ -1,57 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPing">#009966</color>
-    <color name="colorPingRed">#FF0099</color>
-    <color name="colorConfigType">#f97910</color>
+    <!-- Latency & Status Indicators -->
+    <color name="colorPing">#00B37E</color>
+    <color name="colorPingAmber">#E5A100</color>
+    <color name="colorPingRed">#E54D52</color>
+    <color name="colorConfigType">#C9A24B</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="color_fab_active">#B8912F</color>
-    <color name="color_fab_inactive">#9C9C9C</color>
-    <color name="divider_color_light">#E0E0E0</color>
-    <color name="colorIndicator">@color/md_theme_primary</color>
+    <color name="color_fab_active">#C9A24B</color>
+    <color name="color_fab_inactive">#8A92A6</color>
+    <color name="divider_color_light">#E5E9F2</color>
+    <color name="colorIndicator">#C9A24B</color>
 
-    <!-- Primary colors - main tone: black -->
-    <color name="md_theme_primary">#8A6E1E</color>
+    <!-- SRVX Brand Palette - Light Mode -->
+    <color name="srvx_bg">#F4F6FB</color>
+    <color name="srvx_surface">#FFFFFF</color>
+    <color name="srvx_surface_variant">#EAEFF8</color>
+    <color name="srvx_card_bg">#FFFFFF</color>
+    <color name="srvx_card_stroke">#E2E8F4</color>
+    <color name="srvx_card_stroke_selected">#C9A24B</color>
+    <color name="srvx_text_primary">#0E1428</color>
+    <color name="srvx_text_secondary">#5C6788</color>
+    <color name="srvx_text_muted">#8E98B4</color>
+
+    <!-- Accents -->
+    <color name="srvx_gold">#C9A24B</color>
+    <color name="srvx_gold_light">#EBCE8A</color>
+    <color name="srvx_gold_dark">#8F6E20</color>
+    <color name="srvx_gold_glow">#40C9A24B</color>
+
+    <color name="srvx_emerald">#00B37E</color>
+    <color name="srvx_emerald_light">#00E5A3</color>
+    <color name="srvx_emerald_bg">#E6F8F2</color>
+    <color name="srvx_emerald_glow">#4000E5A3</color>
+
+    <color name="srvx_amber">#E5A100</color>
+    <color name="srvx_amber_bg">#FFF8E6</color>
+
+    <color name="srvx_red">#E54D52</color>
+    <color name="srvx_red_bg">#FEECEE</color>
+
+    <color name="srvx_blue">#3B82F6</color>
+    <color name="srvx_blue_bg">#EFF6FF</color>
+
+    <color name="srvx_purple">#8B5CF6</color>
+    <color name="srvx_purple_bg">#F5F3FF</color>
+
+    <!-- Material 3 Mappings - Main tone: Midnight / Gold -->
+    <color name="md_theme_primary">#C9A24B</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
-    <color name="md_theme_primaryContainer">#E0E0E0</color>
-    <color name="md_theme_onPrimaryContainer">#000000</color>
+    <color name="md_theme_primaryContainer">#FDF6E6</color>
+    <color name="md_theme_onPrimaryContainer">#3D2E00</color>
 
-    <!-- Secondary colors - accent color: orange -->
-    <color name="md_theme_secondary">#f97910</color>
+    <color name="md_theme_secondary">#0E1428</color>
     <color name="md_theme_onSecondary">#FFFFFF</color>
-    <color name="md_theme_secondaryContainer">#FFE8D6</color>
-    <color name="md_theme_onSecondaryContainer">#2B1700</color>
+    <color name="md_theme_secondaryContainer">#EAEFF8</color>
+    <color name="md_theme_onSecondaryContainer">#0E1428</color>
 
-    <!-- Tertiary colors - accent color: green -->
-    <color name="md_theme_tertiary">#009966</color>
+    <color name="md_theme_tertiary">#00B37E</color>
     <color name="md_theme_onTertiary">#FFFFFF</color>
-    <color name="md_theme_tertiaryContainer">#A0F2D0</color>
-    <color name="md_theme_onTertiaryContainer">#00201A</color>
+    <color name="md_theme_tertiaryContainer">#E6F8F2</color>
+    <color name="md_theme_onTertiaryContainer">#003825</color>
 
-    <!-- Error colors -->
-    <color name="md_theme_error">#BA1A1A</color>
-    <color name="md_theme_errorContainer">#FFDAD6</color>
+    <color name="md_theme_error">#E54D52</color>
+    <color name="md_theme_errorContainer">#FEECEE</color>
     <color name="md_theme_onError">#FFFFFF</color>
-    <color name="md_theme_onErrorContainer">#410002</color>
+    <color name="md_theme_onErrorContainer">#540009</color>
 
-    <!-- Background colors -->
-    <color name="md_theme_background">#FFFFFF</color>
-    <color name="md_theme_onBackground">#1C1B1F</color>
+    <color name="md_theme_background">#F4F6FB</color>
+    <color name="md_theme_onBackground">#0E1428</color>
 
-    <!-- Surface colors -->
     <color name="md_theme_surface">#FFFFFF</color>
-    <color name="md_theme_onSurface">#1C1B1F</color>
-    <color name="md_theme_surfaceVariant">#E7E0EC</color>
-    <color name="md_theme_onSurfaceVariant">#49454F</color>
-    <color name="md_theme_inverseSurface">#313033</color>
-    <color name="md_theme_inverseOnSurface">#F4EFF4</color>
+    <color name="md_theme_onSurface">#0E1428</color>
+    <color name="md_theme_surfaceVariant">#EAEFF8</color>
+    <color name="md_theme_onSurfaceVariant">#5C6788</color>
+    <color name="md_theme_inverseSurface">#1B2238</color>
+    <color name="md_theme_inverseOnSurface">#F4F6FB</color>
 
-    <!-- Outline colors -->
-    <color name="md_theme_outline">#79747E</color>
-    <color name="md_theme_outlineVariant">#CAC4D0</color>
+    <color name="md_theme_outline">#D2D8E6</color>
+    <color name="md_theme_outlineVariant">#E2E8F4</color>
 
-    <!-- Other colors -->
-    <color name="md_theme_inversePrimary">#C0C0C0</color>
+    <color name="md_theme_inversePrimary">#EBCE8A</color>
     <color name="md_theme_shadow">#000000</color>
-    <color name="md_theme_surfaceTint">#000000</color>
+    <color name="md_theme_surfaceTint">#C9A24B</color>
     <color name="md_theme_scrim">#000000</color>
 </resources>

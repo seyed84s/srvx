@@ -3,6 +3,7 @@ package com.v2ray.ang.srvx
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -23,22 +24,39 @@ class SrvxLoginActivity : AppCompatActivity() {
 
         // Already logged in -> straight to main (configs were imported at first login)
         if (SrvxSession.token(this) != null) {
-            goMain(); return
+            goMain()
+            return
         }
 
         setContentView(R.layout.activity_srvx_login)
 
+        val logo = findViewById<View>(R.id.srvx_logo)
+        val title = findViewById<View>(R.id.srvx_title)
+        val subtitle = findViewById<View>(R.id.srvx_subtitle)
+        val cardLogin = findViewById<View>(R.id.card_login)
         val userField = findViewById<EditText>(R.id.srvx_username)
         val passField = findViewById<EditText>(R.id.srvx_password)
         val errorText = findViewById<TextView>(R.id.srvx_error)
         val loginBtn = findViewById<TextView>(R.id.srvx_login_btn)
         val progress = findViewById<ProgressBar>(R.id.srvx_progress)
 
+        // Entrance animation
+        listOf(logo, title, subtitle, cardLogin).forEach {
+            it?.alpha = 0f
+            it?.translationY = 30f
+        }
+        logo?.animate()?.alpha(1f)?.translationY(0f)?.setDuration(500)?.setInterpolator(DecelerateInterpolator())?.start()
+        title?.animate()?.alpha(1f)?.translationY(0f)?.setDuration(500)?.setStartDelay(100)?.setInterpolator(DecelerateInterpolator())?.start()
+        subtitle?.animate()?.alpha(1f)?.translationY(0f)?.setDuration(500)?.setStartDelay(150)?.setInterpolator(DecelerateInterpolator())?.start()
+        cardLogin?.animate()?.alpha(1f)?.translationY(0f)?.setDuration(600)?.setStartDelay(250)?.setInterpolator(DecelerateInterpolator())?.start()
+
         loginBtn.setOnClickListener {
             val u = userField.text.toString().trim()
             val p = passField.text.toString()
             if (u.isEmpty() || p.isEmpty()) {
                 errorText.text = "نام کاربری و رمز را وارد کنید"
+                errorText.alpha = 0f
+                errorText.animate().alpha(1f).setDuration(200).start()
                 return@setOnClickListener
             }
             errorText.text = ""
@@ -53,9 +71,11 @@ class SrvxLoginActivity : AppCompatActivity() {
                 }
                 if (token == null) {
                     progress.visibility = View.GONE
-                    loginBtn.text = "ورود"
+                    loginBtn.text = "ورود به حساب"
                     loginBtn.isEnabled = true
-                    errorText.text = "ورود ناموفق — اطلاعات نادرست است"
+                    errorText.text = "ورود ناموفق — نام کاربری یا رمز نادرست است"
+                    errorText.alpha = 0f
+                    errorText.animate().alpha(1f).setDuration(200).start()
                     return@launch
                 }
                 SrvxSession.save(this@SrvxLoginActivity, token, u)
@@ -74,7 +94,7 @@ class SrvxLoginActivity : AppCompatActivity() {
                 progress.visibility = View.GONE
                 if (!ok) {
                     Toast.makeText(this@SrvxLoginActivity,
-                        "ورود موفق بود ولی دریافت کانفیگ ناموفق شد", Toast.LENGTH_LONG).show()
+                        "ورود موفق بود ولی دریافت کانفیگ‌ها با خطا مواجه شد", Toast.LENGTH_LONG).show()
                 }
                 goMain()
             }

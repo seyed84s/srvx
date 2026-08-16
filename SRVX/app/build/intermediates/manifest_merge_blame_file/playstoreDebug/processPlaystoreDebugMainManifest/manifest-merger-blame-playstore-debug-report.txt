@@ -1,0 +1,813 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="ir.smcx.srvx"
+4    android:versionCode="4000733"
+5    android:versionName="2.2.3" >
+6
+7    <uses-sdk
+7-->INJECTED
+8        android:minSdkVersion="24"
+8-->INJECTED
+9        android:targetSdkVersion="37" />
+9-->INJECTED
+10
+11    <supports-screens
+11-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:6:5-11:40
+12        android:anyDensity="true"
+12-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:7:9-34
+13        android:largeScreens="true"
+13-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:8:9-36
+14        android:normalScreens="true"
+14-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:9:9-37
+15        android:smallScreens="true"
+15-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:10:9-36
+16        android:xlargeScreens="true" />
+16-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:11:9-37
+17
+18    <uses-feature
+18-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:13:5-15:36
+19        android:name="android.hardware.camera"
+19-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:14:9-47
+20        android:required="false" />
+20-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:15:9-33
+21    <uses-feature
+21-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:16:5-18:36
+22        android:name="android.hardware.camera.autofocus"
+22-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:17:9-57
+23        android:required="false" />
+23-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:18:9-33
+24    <uses-feature
+24-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:19:5-21:36
+25        android:name="android.software.leanback"
+25-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:20:9-49
+26        android:required="false" />
+26-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:21:9-33
+27    <uses-feature
+27-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:22:5-24:36
+28        android:name="android.hardware.touchscreen"
+28-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:23:9-52
+29        android:required="false" />
+29-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:24:9-33
+30
+31    <!-- https://developer.android.com/about/versions/11/privacy/package-visibility -->
+32    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+32-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:27:5-29:77
+32-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:28:9-61
+33    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+33-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:30:5-79
+33-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:30:22-76
+34    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+34-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:31:5-79
+34-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:31:22-76
+35    <uses-permission android:name="android.permission.INTERNET" />
+35-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:32:5-67
+35-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:32:22-64
+36    <uses-permission android:name="android.permission.CAMERA" />
+36-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:33:5-65
+36-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:33:22-62
+37    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+37-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:34:5-35:51
+37-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:34:22-74
+38    <uses-permission
+38-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:36:5-38:38
+39        android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"
+39-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:37:9-73
+40        android:minSdkVersion="34" />
+40-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:38:9-35
+41    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
+42    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+42-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:40:5-77
+42-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:40:22-74
+43    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+43-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:41:5-81
+43-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:41:22-78
+44    <uses-permission android:name="android.permission.WAKE_LOCK" />
+44-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:23:5-68
+44-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:23:22-65
+45
+46    <permission
+46-->[androidx.core:core:1.17.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\c10fd7a18a845f952b9aa54b98bec77d\transformed\core-1.17.0\AndroidManifest.xml:22:5-24:47
+47        android:name="ir.smcx.srvx.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+47-->[androidx.core:core:1.17.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\c10fd7a18a845f952b9aa54b98bec77d\transformed\core-1.17.0\AndroidManifest.xml:23:9-81
+48        android:protectionLevel="signature" />
+48-->[androidx.core:core:1.17.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\c10fd7a18a845f952b9aa54b98bec77d\transformed\core-1.17.0\AndroidManifest.xml:24:9-44
+49
+50    <uses-permission android:name="ir.smcx.srvx.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+50-->[androidx.core:core:1.17.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\c10fd7a18a845f952b9aa54b98bec77d\transformed\core-1.17.0\AndroidManifest.xml:26:5-97
+50-->[androidx.core:core:1.17.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\c10fd7a18a845f952b9aa54b98bec77d\transformed\core-1.17.0\AndroidManifest.xml:26:22-94
+51
+52    <uses-feature
+52-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:28:5-30:36
+53        android:name="android.hardware.camera.front"
+53-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:29:9-53
+54        android:required="false" />
+54-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:30:9-33
+55    <uses-feature
+55-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:36:5-38:36
+56        android:name="android.hardware.camera.flash"
+56-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:37:9-53
+57        android:required="false" />
+57-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:38:9-33
+58    <uses-feature
+58-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:39:5-41:36
+59        android:name="android.hardware.screen.landscape"
+59-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:40:9-57
+60        android:required="false" />
+60-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:41:9-33
+61    <uses-feature
+61-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:42:5-44:36
+62        android:name="android.hardware.wifi"
+62-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:43:9-45
+63        android:required="false" />
+63-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:44:9-33
+64
+65    <application
+65-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:43:5-304:19
+66        android:name="com.v2ray.ang.AngApplication"
+66-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:44:9-39
+67        android:allowBackup="true"
+67-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:45:9-35
+68        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+68-->[androidx.core:core:1.17.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\c10fd7a18a845f952b9aa54b98bec77d\transformed\core-1.17.0\AndroidManifest.xml:28:18-86
+69        android:banner="@mipmap/ic_banner"
+69-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:46:9-43
+70        android:debuggable="true"
+71        android:extractNativeLibs="true"
+71-->INJECTED
+72        android:icon="@mipmap/ic_launcher"
+72-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:47:9-43
+73        android:label="@string/app_name"
+73-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:48:9-41
+74        android:networkSecurityConfig="@xml/network_security_config"
+74-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:49:9-69
+75        android:supportsRtl="true"
+75-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:50:9-35
+76        android:theme="@style/AppThemeDayNight.NoActionBar"
+76-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:51:9-60
+77        android:usesCleartextTraffic="true" >
+77-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:52:9-44
+78        <activity
+78-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:54:9-64:20
+79            android:name="com.v2ray.ang.srvx.SrvxLoginActivity"
+79-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:55:13-51
+80            android:exported="true"
+80-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:56:13-36
+81            android:launchMode="singleTask"
+81-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:57:13-44
+82            android:theme="@style/AppThemeDayNight.NoActionBar" >
+82-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:58:13-64
+83            <intent-filter>
+83-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:59:13-63:29
+84                <action android:name="android.intent.action.MAIN" />
+84-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:60:17-69
+84-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:60:25-66
+85
+86                <category android:name="android.intent.category.LAUNCHER" />
+86-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:61:17-77
+86-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:61:27-74
+87                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+87-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:62:17-86
+87-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:62:27-83
+88            </intent-filter>
+89        </activity>
+90        <activity
+90-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:65:9-76:20
+91            android:name="com.v2ray.ang.ui.MainActivity"
+91-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:66:13-44
+92            android:exported="true"
+92-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:67:13-36
+93            android:launchMode="singleTask" >
+93-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:68:13-44
+94            <intent-filter>
+94-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:69:13-71:29
+95                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
+95-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:70:17-99
+95-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:70:25-96
+96            </intent-filter>
+97
+98            <meta-data
+98-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:73:13-75:53
+99                android:name="android.app.shortcuts"
+99-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:74:17-53
+100                android:resource="@xml/shortcuts" />
+100-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:75:17-50
+101        </activity>
+102        <activity
+102-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:77:9-80:60
+103            android:name="com.v2ray.ang.ui.ServerActivity"
+103-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:78:13-46
+104            android:exported="false"
+104-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:79:13-37
+105            android:windowSoftInputMode="stateUnchanged" />
+105-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:80:13-57
+106        <activity
+106-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:81:9-84:60
+107            android:name="com.v2ray.ang.ui.ServerCustomConfigActivity"
+107-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:82:13-58
+108            android:exported="false"
+108-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:83:13-37
+109            android:windowSoftInputMode="stateUnchanged" />
+109-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:84:13-57
+110        <activity
+110-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:85:9-88:60
+111            android:name="com.v2ray.ang.ui.ServerGroupActivity"
+111-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:86:13-51
+112            android:exported="false"
+112-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:87:13-37
+113            android:windowSoftInputMode="stateUnchanged" />
+113-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:88:13-57
+114        <activity
+114-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:89:9-92:60
+115            android:name="com.v2ray.ang.ui.ServerProxyChainActivity"
+115-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:90:13-56
+116            android:exported="false"
+116-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:91:13-37
+117            android:windowSoftInputMode="stateUnchanged" />
+117-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:92:13-57
+118        <activity
+118-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:93:9-95:40
+119            android:name="com.v2ray.ang.ui.SettingsActivity"
+119-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:94:13-48
+120            android:exported="false" />
+120-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:95:13-37
+121        <activity
+121-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:96:9-98:40
+122            android:name="com.v2ray.ang.ui.PerAppProxyActivity"
+122-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:97:13-51
+123            android:exported="false" />
+123-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:98:13-37
+124        <activity
+124-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:99:9-101:40
+125            android:name="com.v2ray.ang.ui.AppPickerActivity"
+125-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:100:13-49
+126            android:exported="false" />
+126-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:101:13-37
+127        <activity
+127-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:102:9-104:40
+128            android:name="com.v2ray.ang.ui.ScannerActivity"
+128-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:103:13-47
+129            android:exported="false" />
+129-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:104:13-37
+130        <activity
+130-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:105:9-107:40
+131            android:name="com.v2ray.ang.ui.LogcatActivity"
+131-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:106:13-46
+132            android:exported="false" />
+132-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:107:13-37
+133        <activity
+133-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:108:9-110:40
+134            android:name="com.v2ray.ang.ui.RoutingSettingActivity"
+134-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:109:13-54
+135            android:exported="false" />
+135-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:110:13-37
+136        <activity
+136-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:111:9-113:40
+137            android:name="com.v2ray.ang.ui.RoutingEditActivity"
+137-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:112:13-51
+138            android:exported="false" />
+138-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:113:13-37
+139        <activity
+139-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:114:9-116:40
+140            android:name="com.v2ray.ang.ui.SubSettingActivity"
+140-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:115:13-50
+141            android:exported="false" />
+141-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:116:13-37
+142        <activity
+142-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:117:9-119:40
+143            android:name="com.v2ray.ang.ui.UserAssetActivity"
+143-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:118:13-49
+144            android:exported="false" />
+144-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:119:13-37
+145        <activity
+145-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:120:9-122:40
+146            android:name="com.v2ray.ang.ui.UserAssetUrlActivity"
+146-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:121:13-52
+147            android:exported="false" />
+147-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:122:13-37
+148        <activity
+148-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:124:9-126:40
+149            android:name="com.v2ray.ang.ui.SubEditActivity"
+149-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:125:13-47
+150            android:exported="false" />
+150-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:126:13-37
+151        <activity
+151-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:127:9-129:40
+152            android:name="com.v2ray.ang.ui.ScScannerActivity"
+152-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:128:13-49
+153            android:exported="false" />
+153-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:129:13-37
+154        <activity
+154-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:130:9-135:79
+155            android:name="com.v2ray.ang.ui.ScSwitchActivity"
+155-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:131:13-48
+156            android:excludeFromRecents="true"
+156-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:132:13-46
+157            android:exported="false"
+157-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:133:13-37
+158            android:process=":RunSoLibV2RayDaemon"
+158-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:134:13-51
+159            android:theme="@style/AppThemeDayNight.NoActionBar.Translucent" />
+159-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:135:13-76
+160        <activity
+160-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:136:9-141:79
+161            android:name="com.v2ray.ang.ui.ScStartActivity"
+161-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:137:13-47
+162            android:excludeFromRecents="true"
+162-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:138:13-46
+163            android:exported="false"
+163-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:139:13-37
+164            android:process=":RunSoLibV2RayDaemon"
+164-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:140:13-51
+165            android:theme="@style/AppThemeDayNight.NoActionBar.Translucent" />
+165-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:141:13-76
+166        <activity
+166-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:142:9-147:79
+167            android:name="com.v2ray.ang.ui.ScStopActivity"
+167-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:143:13-46
+168            android:excludeFromRecents="true"
+168-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:144:13-46
+169            android:exported="false"
+169-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:145:13-37
+170            android:process=":RunSoLibV2RayDaemon"
+170-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:146:13-51
+171            android:theme="@style/AppThemeDayNight.NoActionBar.Translucent" />
+171-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:147:13-76
+172        <activity
+172-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:149:9-167:20
+173            android:name="com.v2ray.ang.ui.UrlSchemeActivity"
+173-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:150:13-49
+174            android:exported="true" >
+174-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:151:13-36
+175            <intent-filter>
+175-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:152:13-156:29
+176                <action android:name="android.intent.action.SEND" />
+176-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:153:17-69
+176-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:153:25-66
+177
+178                <category android:name="android.intent.category.DEFAULT" />
+178-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:154:17-76
+178-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:154:27-73
+179
+180                <data android:mimeType="text/plain" />
+180-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:155:17-55
+180-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:155:23-52
+181            </intent-filter>
+182            <intent-filter>
+182-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:157:13-166:29
+183                <action android:name="android.intent.action.VIEW" />
+183-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:158:17-69
+183-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:158:25-66
+184
+185                <category android:name="android.intent.category.BROWSABLE" />
+185-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:160:17-78
+185-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:160:27-75
+186                <category android:name="android.intent.category.DEFAULT" />
+186-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:154:17-76
+186-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:154:27-73
+187
+188                <data android:scheme="v2rayng" />
+188-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:155:17-55
+188-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:163:23-47
+189                <data android:host="install-config" />
+189-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:155:17-55
+189-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:164:23-52
+190                <data android:host="install-sub" />
+190-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:155:17-55
+190-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:164:23-52
+191            </intent-filter>
+192        </activity>
+193        <activity
+193-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:168:9-170:40
+194            android:name="com.v2ray.ang.ui.CheckUpdateActivity"
+194-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:169:13-51
+195            android:exported="false" />
+195-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:170:13-37
+196        <activity
+196-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:171:9-173:40
+197            android:name="com.v2ray.ang.ui.BackupActivity"
+197-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:172:13-46
+198            android:exported="false" />
+198-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:173:13-37
+199        <activity
+199-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:174:9-176:40
+200            android:name="com.v2ray.ang.ui.AboutActivity"
+200-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:175:13-45
+201            android:exported="false" />
+201-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:176:13-37
+202
+203        <service
+203-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:178:9-196:19
+204            android:name="com.v2ray.ang.service.CoreVpnService"
+204-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:179:13-51
+205            android:enabled="true"
+205-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:180:13-35
+206            android:exported="false"
+206-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:181:13-37
+207            android:foregroundServiceType="specialUse"
+207-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:182:13-55
+208            android:label="@string/app_name"
+208-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:183:13-45
+209            android:permission="android.permission.BIND_VPN_SERVICE"
+209-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:184:13-69
+210            android:process=":RunSoLibV2RayDaemon" >
+210-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:185:13-51
+211            <intent-filter>
+211-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:187:13-189:29
+212                <action android:name="android.net.VpnService" />
+212-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:188:17-65
+212-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:188:25-62
+213            </intent-filter>
+214
+215            <meta-data
+215-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:190:13-192:40
+216                android:name="android.net.VpnService.SUPPORTS_ALWAYS_ON"
+216-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:191:17-73
+217                android:value="true" />
+217-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:192:17-37
+218
+219            <property
+219-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:193:13-195:39
+220                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+220-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:194:17-76
+221                android:value="vpn" />
+221-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:195:17-36
+222        </service>
+223        <service
+223-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:198:9-207:19
+224            android:name="com.v2ray.ang.service.CoreProxyOnlyService"
+224-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:199:13-57
+225            android:exported="false"
+225-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:200:13-37
+226            android:foregroundServiceType="specialUse"
+226-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:201:13-55
+227            android:label="@string/app_name"
+227-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:202:13-45
+228            android:process=":RunSoLibV2RayDaemon" >
+228-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:203:13-51
+229            <property
+229-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:193:13-195:39
+230                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+230-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:194:17-76
+231                android:value="proxy" />
+231-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:195:17-36
+232        </service>
+233        <service
+233-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:209:9-217:19
+234            android:name="com.v2ray.ang.service.CoreTestService"
+234-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:210:13-52
+235            android:exported="false"
+235-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:211:13-37
+236            android:foregroundServiceType="specialUse"
+236-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:212:13-55
+237            android:process=":RunSoLibV2RayDaemon" >
+237-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:213:13-51
+238            <property
+238-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:193:13-195:39
+239                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+239-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:194:17-76
+240                android:value="test" />
+240-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:195:17-36
+241        </service>
+242
+243        <receiver
+243-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:219:9-231:20
+244            android:name="com.v2ray.ang.receiver.WidgetProvider"
+244-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:220:13-52
+245            android:exported="true"
+245-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:221:13-36
+246            android:process=":RunSoLibV2RayDaemon" >
+246-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:222:13-51
+247            <meta-data
+247-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:223:13-225:63
+248                android:name="android.appwidget.provider"
+248-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:224:17-58
+249                android:resource="@xml/app_widget_provider" />
+249-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:225:17-60
+250
+251            <intent-filter>
+251-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:226:13-230:29
+252                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+252-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:227:17-84
+252-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:227:25-81
+253                <action android:name="ir.smcx.srvx.action.widget.click" />
+253-->INJECTED
+253-->INJECTED
+254                <action android:name="ir.smcx.srvx.action.activity" />
+254-->INJECTED
+254-->INJECTED
+255            </intent-filter>
+256        </receiver>
+257        <receiver
+257-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:232:9-239:20
+258            android:name="com.v2ray.ang.receiver.BootReceiver"
+258-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:233:13-50
+259            android:exported="true"
+259-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:234:13-36
+260            android:label="BootReceiver" >
+260-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:235:13-41
+261            <intent-filter>
+261-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:236:13-238:29
+262                <action android:name="android.intent.action.BOOT_COMPLETED" />
+262-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:237:17-79
+262-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:237:25-76
+263            </intent-filter>
+264        </receiver>
+265
+266        <service
+266-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:241:9-255:19
+267            android:name="com.v2ray.ang.service.QSTileService"
+267-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:242:13-50
+268            android:exported="true"
+268-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:243:13-36
+269            android:foregroundServiceType="specialUse"
+269-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:244:13-55
+270            android:icon="@drawable/ic_stat_name"
+270-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:245:13-50
+271            android:label="@string/app_tile_name"
+271-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:246:13-50
+272            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+272-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:247:13-77
+273            android:process=":RunSoLibV2RayDaemon" >
+273-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:248:13-51
+274            <intent-filter>
+274-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:249:13-251:29
+275                <action android:name="android.service.quicksettings.action.QS_TILE" />
+275-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:250:17-87
+275-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:250:25-84
+276            </intent-filter>
+277
+278            <property
+278-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:193:13-195:39
+279                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+279-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:194:17-76
+280                android:value="tile" />
+280-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:195:17-36
+281        </service>
+282        <!-- =====================Tasker===================== -->
+283        <activity
+283-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:257:9-264:20
+284            android:name="com.v2ray.ang.ui.TaskerActivity"
+284-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:258:13-46
+285            android:exported="true"
+285-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:259:13-36
+286            android:icon="@mipmap/ic_launcher" >
+286-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:260:13-47
+287            <intent-filter>
+287-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:261:13-263:29
+288                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+288-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:262:17-95
+288-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:262:25-92
+289            </intent-filter>
+290        </activity>
+291
+292        <receiver
+292-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:266:9-274:20
+293            android:name="com.v2ray.ang.receiver.TaskerReceiver"
+293-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:267:13-52
+294            android:exported="true"
+294-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:268:13-36
+295            android:process=":RunSoLibV2RayDaemon" >
+295-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:269:13-51
+296            <intent-filter>
+296-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:271:13-273:29
+297                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+297-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:272:17-95
+297-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:272:25-92
+298            </intent-filter>
+299        </receiver>
+300        <!-- =====================Tasker===================== -->
+301        <provider
+301-->INJECTED
+302            android:name="androidx.startup.InitializationProvider"
+302-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:277:13-67
+303            android:authorities="ir.smcx.srvx.androidx-startup"
+303-->INJECTED
+304            android:exported="false" >
+304-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:279:13-37
+305            <meta-data
+305-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\6aea6bc51d7c17f05f4ba3062713af87\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+306                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+306-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\6aea6bc51d7c17f05f4ba3062713af87\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+307                android:value="androidx.startup" />
+307-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\6aea6bc51d7c17f05f4ba3062713af87\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+308            <meta-data
+308-->[androidx.lifecycle:lifecycle-process:2.10.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\1c7a5c05836bdbb7245f0c11195e86ce\transformed\lifecycle-process-2.10.0\AndroidManifest.xml:29:13-31:52
+309                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+309-->[androidx.lifecycle:lifecycle-process:2.10.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\1c7a5c05836bdbb7245f0c11195e86ce\transformed\lifecycle-process-2.10.0\AndroidManifest.xml:30:17-78
+310                android:value="androidx.startup" />
+310-->[androidx.lifecycle:lifecycle-process:2.10.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\1c7a5c05836bdbb7245f0c11195e86ce\transformed\lifecycle-process-2.10.0\AndroidManifest.xml:31:17-49
+311            <meta-data
+311-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:29:13-31:52
+312                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+312-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:30:17-85
+313                android:value="androidx.startup" />
+313-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:31:17-49
+314            <meta-data
+314-->[com.squareup.okhttp3:okhttp-android:5.3.2] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\81d278c89338e95b119561ea0ce26010\transformed\okhttp-release\AndroidManifest.xml:16:13-18:52
+315                android:name="okhttp3.internal.platform.PlatformInitializer"
+315-->[com.squareup.okhttp3:okhttp-android:5.3.2] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\81d278c89338e95b119561ea0ce26010\transformed\okhttp-release\AndroidManifest.xml:17:17-77
+316                android:value="androidx.startup" />
+316-->[com.squareup.okhttp3:okhttp-android:5.3.2] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\81d278c89338e95b119561ea0ce26010\transformed\okhttp-release\AndroidManifest.xml:18:17-49
+317        </provider>
+318
+319        <service
+319-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:289:9-292:37
+320            android:name="androidx.work.multiprocess.RemoteWorkManagerService"
+320-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:290:13-79
+321            android:exported="false"
+321-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:291:13-37
+322            android:process=":bg" />
+322-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:292:13-34
+323
+324        <provider
+324-->INJECTED
+325            android:name="androidx.core.content.FileProvider"
+325-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:295:13-62
+326            android:authorities="ir.smcx.srvx.cache"
+326-->INJECTED
+327            android:exported="false"
+327-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:297:13-37
+328            android:grantUriPermissions="true" >
+328-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:298:13-47
+329            <meta-data
+329-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:299:13-301:55
+330                android:name="android.support.FILE_PROVIDER_PATHS"
+330-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:300:17-67
+331                android:resource="@xml/cache_paths" />
+331-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:301:17-52
+332        </provider>
+333
+334        <activity
+334-->[com.github.T8RIN.QuickieExtended:quickie-foss:1.14.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0b955fd74d9d5ba174d6d7d850b90dcc\transformed\quickie-foss-1.14.0\AndroidManifest.xml:15:9-19:45
+335            android:name="io.github.g00fy2.quickie.QRScannerActivity"
+335-->[com.github.T8RIN.QuickieExtended:quickie-foss:1.14.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0b955fd74d9d5ba174d6d7d850b90dcc\transformed\quickie-foss-1.14.0\AndroidManifest.xml:16:13-70
+336            android:screenOrientation="behind"
+336-->[com.github.T8RIN.QuickieExtended:quickie-foss:1.14.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0b955fd74d9d5ba174d6d7d850b90dcc\transformed\quickie-foss-1.14.0\AndroidManifest.xml:17:13-47
+337            android:theme="@style/QuickieScannerActivity" />
+337-->[com.github.T8RIN.QuickieExtended:quickie-foss:1.14.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0b955fd74d9d5ba174d6d7d850b90dcc\transformed\quickie-foss-1.14.0\AndroidManifest.xml:18:13-58
+338        <!--
+339        Service for holding metadata. Cannot be instantiated.
+340        Metadata will be merged from other manifests.
+341        -->
+342        <service
+342-->[androidx.camera:camera-core:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\9bb20a62b88555b2fb99c52d63d51a22\transformed\camera-core-1.4.1\AndroidManifest.xml:29:9-33:78
+343            android:name="androidx.camera.core.impl.MetadataHolderService"
+343-->[androidx.camera:camera-core:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\9bb20a62b88555b2fb99c52d63d51a22\transformed\camera-core-1.4.1\AndroidManifest.xml:30:13-75
+344            android:enabled="false"
+344-->[androidx.camera:camera-core:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\9bb20a62b88555b2fb99c52d63d51a22\transformed\camera-core-1.4.1\AndroidManifest.xml:31:13-36
+345            android:exported="false" >
+345-->[androidx.camera:camera-core:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\9bb20a62b88555b2fb99c52d63d51a22\transformed\camera-core-1.4.1\AndroidManifest.xml:32:13-37
+346            <meta-data
+346-->[androidx.camera:camera-camera2:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\455194765918f3e1a6e57f98984d6e52\transformed\camera-camera2-1.4.1\AndroidManifest.xml:30:13-32:89
+347                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+347-->[androidx.camera:camera-camera2:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\455194765918f3e1a6e57f98984d6e52\transformed\camera-camera2-1.4.1\AndroidManifest.xml:31:17-103
+348                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+348-->[androidx.camera:camera-camera2:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\455194765918f3e1a6e57f98984d6e52\transformed\camera-camera2-1.4.1\AndroidManifest.xml:32:17-86
+349        </service>
+350        <service
+350-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:39:9-45:35
+351            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+351-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:40:13-84
+352            android:directBootAware="false"
+352-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:41:13-44
+353            android:enabled="@bool/enable_system_job_service_default"
+353-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:42:13-70
+354            android:exported="true"
+354-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:43:13-36
+355            android:permission="android.permission.BIND_JOB_SERVICE" />
+355-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:44:13-69
+356        <service
+356-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:46:9-52:35
+357            android:name="androidx.work.impl.foreground.SystemForegroundService"
+357-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:47:13-81
+358            android:directBootAware="false"
+358-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:48:13-44
+359            android:enabled="@bool/enable_system_foreground_service_default"
+359-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:49:13-77
+360            android:exported="false" />
+360-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:50:13-37
+361
+362        <receiver
+362-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:54:9-59:35
+363            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+363-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:55:13-88
+364            android:directBootAware="false"
+364-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:56:13-44
+365            android:enabled="true"
+365-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:57:13-35
+366            android:exported="false" />
+366-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:58:13-37
+367        <receiver
+367-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:60:9-69:20
+368            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+368-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:61:13-88
+369            android:directBootAware="false"
+369-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:62:13-44
+370            android:enabled="false"
+370-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:63:13-36
+371            android:exported="false" >
+371-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:64:13-37
+372            <intent-filter>
+372-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:236:13-238:29
+373                <action android:name="android.intent.action.BOOT_COMPLETED" />
+373-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:237:17-79
+373-->C:\Users\Seyed\Documents\GitHub\srvx\SRVX\app\src\main\AndroidManifest.xml:237:25-76
+374            </intent-filter>
+375        </receiver>
+376        <receiver
+376-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:70:9-80:20
+377            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+377-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:71:13-78
+378            android:directBootAware="false"
+378-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:72:13-44
+379            android:enabled="true"
+379-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:73:13-35
+380            android:exported="true"
+380-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:74:13-36
+381            android:permission="android.permission.DUMP" >
+381-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:75:13-57
+382            <intent-filter>
+382-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:77:13-79:29
+383                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+383-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:78:17-88
+383-->[androidx.work:work-runtime:2.11.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\ef1abc81cfe1a257947594a5ec5d6d61\transformed\work-runtime-2.11.1\AndroidManifest.xml:78:25-85
+384            </intent-filter>
+385        </receiver>
+386
+387        <uses-library
+387-->[androidx.window:window:1.0.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\1c069fb58b47ae99d2703da6171efc6f\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
+388            android:name="androidx.window.extensions"
+388-->[androidx.window:window:1.0.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\1c069fb58b47ae99d2703da6171efc6f\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
+389            android:required="false" />
+389-->[androidx.window:window:1.0.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\1c069fb58b47ae99d2703da6171efc6f\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
+390        <uses-library
+390-->[androidx.window:window:1.0.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\1c069fb58b47ae99d2703da6171efc6f\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
+391            android:name="androidx.window.sidecar"
+391-->[androidx.window:window:1.0.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\1c069fb58b47ae99d2703da6171efc6f\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
+392            android:required="false" />
+392-->[androidx.window:window:1.0.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\1c069fb58b47ae99d2703da6171efc6f\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
+393
+394        <receiver
+394-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:34:9-52:20
+395            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+395-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:35:13-76
+396            android:directBootAware="false"
+396-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:36:13-44
+397            android:enabled="true"
+397-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:37:13-35
+398            android:exported="true"
+398-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:38:13-36
+399            android:permission="android.permission.DUMP" >
+399-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:39:13-57
+400            <intent-filter>
+400-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:40:13-42:29
+401                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+401-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:41:17-91
+401-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:41:25-88
+402            </intent-filter>
+403            <intent-filter>
+403-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:43:13-45:29
+404                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+404-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:44:17-85
+404-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:44:25-82
+405            </intent-filter>
+406            <intent-filter>
+406-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:46:13-48:29
+407                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+407-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:47:17-88
+407-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:47:25-85
+408            </intent-filter>
+409            <intent-filter>
+409-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:49:13-51:29
+410                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+410-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:50:17-95
+410-->[androidx.profileinstaller:profileinstaller:1.4.1] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\0c7ef9ae30bcabf398c01f761962fd7f\transformed\profileinstaller-1.4.1\AndroidManifest.xml:50:25-92
+411            </intent-filter>
+412        </receiver>
+413
+414        <service
+414-->[androidx.room:room-runtime-android:2.7.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\57dd292504598e13f7dad24c311e6d32\transformed\room-runtime-release\AndroidManifest.xml:24:9-28:63
+415            android:name="androidx.room.MultiInstanceInvalidationService"
+415-->[androidx.room:room-runtime-android:2.7.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\57dd292504598e13f7dad24c311e6d32\transformed\room-runtime-release\AndroidManifest.xml:25:13-74
+416            android:directBootAware="true"
+416-->[androidx.room:room-runtime-android:2.7.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\57dd292504598e13f7dad24c311e6d32\transformed\room-runtime-release\AndroidManifest.xml:26:13-43
+417            android:exported="false" />
+417-->[androidx.room:room-runtime-android:2.7.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\57dd292504598e13f7dad24c311e6d32\transformed\room-runtime-release\AndroidManifest.xml:27:13-37
+418
+419        <activity
+419-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
+420            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+420-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
+421            android:clearTaskOnLaunch="true"
+421-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
+422            android:screenOrientation="sensorLandscape"
+422-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
+423            android:stateNotNeeded="true"
+423-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
+424            android:theme="@style/zxing_CaptureTheme"
+424-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
+425            android:windowSoftInputMode="stateAlwaysHidden" />
+425-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Seyed\.gradle\caches\9.5.1\transforms\98003e2c0a572514cb06e9e9bfbc1da6\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
+426    </application>
+427
+428</manifest>

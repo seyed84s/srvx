@@ -95,7 +95,17 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
         })
 
         binding.fab.setOnClickListener { handleFabAction() }
+        binding.srvxHeroConnectBtn.setOnClickListener { handleFabAction() }
         binding.layoutTest.setOnClickListener { handleLayoutTestClick() }
+        binding.btnPingAll.setOnClickListener {
+            if (mainViewModel.serversCache.isNotEmpty()) {
+                toast(getString(R.string.connection_test_testing_count, mainViewModel.serversCache.count()))
+                mainViewModel.testAllRealPing()
+            }
+        }
+        binding.srvxBtnRefreshStatus.setOnClickListener {
+            com.v2ray.ang.srvx.SrvxStatus.refresh(this)
+        }
 
         setupGroupTab()
         setupViewModel()
@@ -156,9 +166,14 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
     private fun handleLayoutTestClick() {
         if (mainViewModel.isRunning.value == true) {
             setTestState(getString(R.string.connection_test_testing))
+            binding.tvPingQuickLabel.text = getString(R.string.connection_test_testing)
             mainViewModel.testCurrentServerRealPing()
         } else {
-            // service not running: keep existing no-op (could show a message if desired)
+            // Test current server delay even when not connected
+            val currentGuid = MmkvManager.getSelectServer()
+            if (!currentGuid.isNullOrEmpty()) {
+                mainViewModel.testAllRealPing()
+            }
         }
     }
 
@@ -181,12 +196,22 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun setTestState(content: String?) {
-        binding.tvTestState.text = content
+        val text = content.orEmpty()
+        binding.tvTestState.text = text
+        if (text.isNotEmpty() && text != getString(R.string.connection_connected) && text != getString(R.string.connection_not_connected)) {
+            binding.tvPingQuickLabel.text = text
+        }
     }
 
     private fun applyRunningState(isLoading: Boolean, isRunning: Boolean) {
         if (isLoading) {
             binding.fab.setImageResource(R.drawable.ic_fab_check)
+            binding.srvxHeroConnectBtn.setBackgroundResource(R.drawable.srvx_connect_btn_connecting)
+            binding.srvxHeroPowerIcon.setImageResource(R.drawable.srvx_ic_power)
+            binding.srvxHeroPowerIcon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.md_theme_onPrimaryContainer))
+            binding.srvxHeroConnectBtn.animate().scaleX(0.94f).scaleY(0.94f).setDuration(150).start()
+            binding.tvTestState.text = "در حال اتصال به اینترنت امن..."
+            binding.tvTestState.setTextColor(ContextCompat.getColor(this, R.color.srvx_gold))
             return
         }
 
@@ -194,13 +219,37 @@ class MainActivity : HelperBaseActivity(), NavigationView.OnNavigationItemSelect
             binding.fab.setImageResource(R.drawable.ic_stop_24dp)
             binding.fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.color_fab_active))
             binding.fab.contentDescription = getString(R.string.action_stop_service)
-            setTestState(getString(R.string.connection_connected))
+
+            // Hero centerpiece connected state
+            binding.srvxHeroConnectBtn.setBackgroundResource(R.drawable.srvx_connect_btn_active)
+            binding.srvxHeroPowerIcon.setImageResource(R.drawable.srvx_ic_shield)
+            binding.srvxHeroPowerIcon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorWhite))
+            binding.srvxHeroConnectBtn.animate().scaleX(1.05f).scaleY(1.05f).setDuration(250).start()
+
+            binding.tvTestState.text = "متصل شد — اینترنت امن و پرسرعت"
+            binding.tvTestState.setTextColor(ContextCompat.getColor(this, R.color.srvx_emerald))
+
+            binding.layoutTest.setBackgroundResource(R.drawable.srvx_pill_ping_green)
+            binding.tvPingQuickLabel.text = "تست پینگ فعال"
+            binding.tvPingQuickLabel.setTextColor(ContextCompat.getColor(this, R.color.srvx_emerald))
             binding.layoutTest.isFocusable = true
         } else {
             binding.fab.setImageResource(R.drawable.ic_play_24dp)
             binding.fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.color_fab_inactive))
             binding.fab.contentDescription = getString(R.string.tasker_start_service)
-            setTestState(getString(R.string.connection_not_connected))
+
+            // Hero centerpiece disconnected state
+            binding.srvxHeroConnectBtn.setBackgroundResource(R.drawable.srvx_connect_btn_inactive)
+            binding.srvxHeroPowerIcon.setImageResource(R.drawable.srvx_ic_power)
+            binding.srvxHeroPowerIcon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.srvx_text_primary))
+            binding.srvxHeroConnectBtn.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
+
+            binding.tvTestState.text = "قطع — برای برقراری اتصال لمس کنید"
+            binding.tvTestState.setTextColor(ContextCompat.getColor(this, R.color.srvx_text_secondary))
+
+            binding.layoutTest.setBackgroundResource(R.drawable.srvx_pill_ping_neutral)
+            binding.tvPingQuickLabel.text = "تست پینگ اتصال"
+            binding.tvPingQuickLabel.setTextColor(ContextCompat.getColor(this, R.color.srvx_text_secondary))
             binding.layoutTest.isFocusable = false
         }
     }

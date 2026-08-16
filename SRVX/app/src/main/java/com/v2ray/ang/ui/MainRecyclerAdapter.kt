@@ -1,4 +1,3 @@
-
 package com.v2ray.ang.ui
 
 import android.annotation.SuppressLint
@@ -54,63 +53,62 @@ class MainRecyclerAdapter(
             val context = holder.itemMainBinding.root.context
             val guid = data[position].guid
             val profile = data[position].profile
+            val isSelected = guid == MmkvManager.getSelectServer()
 
-            holder.itemView.setBackgroundColor(Color.TRANSPARENT)
+            // Server card selection highlight
+            val strokeWidthPx = (if (isSelected) 2 else 1) * context.resources.displayMetrics.density
+            holder.itemMainBinding.cardItem.strokeWidth = strokeWidthPx.toInt()
+            holder.itemMainBinding.cardItem.strokeColor = ContextCompat.getColor(
+                context,
+                if (isSelected) R.color.srvx_card_stroke_selected else R.color.srvx_card_stroke
+            )
+            holder.itemMainBinding.imgRadio.setImageResource(
+                if (isSelected) R.drawable.srvx_radio_active else R.drawable.srvx_radio_inactive
+            )
 
-            //Name address
+            // Name & address
             holder.itemMainBinding.tvName.text = profile.remarks
             holder.itemMainBinding.tvStatistics.text = getAddress(profile)
             holder.itemMainBinding.tvType.text = getProtocolDescription(profile)
 
-            //TestResult
+            // TestResult / Latency styling
             val aff = MmkvManager.decodeServerAffiliationInfo(guid)
-            holder.itemMainBinding.tvTestResult.text = aff?.getTestDelayString().orEmpty()
-            if ((aff?.testDelayMillis ?: 0L) < 0L) {
+            val delayStr = aff?.getTestDelayString().orEmpty()
+            val delayMillis = aff?.testDelayMillis ?: 0L
+
+            if (delayStr.isEmpty()) {
+                holder.itemMainBinding.tvTestResult.text = "—"
+                holder.itemMainBinding.tvTestResult.setBackgroundResource(R.drawable.srvx_pill_ping_neutral)
+                holder.itemMainBinding.tvTestResult.setTextColor(ContextCompat.getColor(context, R.color.srvx_text_muted))
+            } else if (delayMillis < 0L) {
+                holder.itemMainBinding.tvTestResult.text = delayStr
+                holder.itemMainBinding.tvTestResult.setBackgroundResource(R.drawable.srvx_pill_ping_red)
                 holder.itemMainBinding.tvTestResult.setTextColor(ContextCompat.getColor(context, R.color.colorPingRed))
-            } else {
+            } else if (delayMillis <= 250L) {
+                holder.itemMainBinding.tvTestResult.text = delayStr
+                holder.itemMainBinding.tvTestResult.setBackgroundResource(R.drawable.srvx_pill_ping_green)
                 holder.itemMainBinding.tvTestResult.setTextColor(ContextCompat.getColor(context, R.color.colorPing))
-            }
-
-            //layoutIndicator
-            if (guid == MmkvManager.getSelectServer()) {
-                holder.itemMainBinding.layoutIndicator.setBackgroundResource(R.color.colorIndicator)
+            } else if (delayMillis <= 500L) {
+                holder.itemMainBinding.tvTestResult.text = delayStr
+                holder.itemMainBinding.tvTestResult.setBackgroundResource(R.drawable.srvx_pill_ping_amber)
+                holder.itemMainBinding.tvTestResult.setTextColor(ContextCompat.getColor(context, R.color.colorPingAmber))
             } else {
-                holder.itemMainBinding.layoutIndicator.setBackgroundResource(0)
+                holder.itemMainBinding.tvTestResult.text = delayStr
+                holder.itemMainBinding.tvTestResult.setBackgroundResource(R.drawable.srvx_pill_ping_red)
+                holder.itemMainBinding.tvTestResult.setTextColor(ContextCompat.getColor(context, R.color.colorPingRed))
             }
 
-            //subscription remarks
-            val subRemarks = getSubscriptionRemarks(profile)
-            holder.itemMainBinding.tvSubscription.text = subRemarks
-            holder.itemMainBinding.layoutSubscription.visibility = if (subRemarks.isEmpty()) View.GONE else View.VISIBLE
-
-            //SRVX: hide share/edit/remove/more on every config — users can only connect
-            holder.itemMainBinding.layoutShare.visibility = View.GONE
-            holder.itemMainBinding.layoutEdit.visibility = View.GONE
-            holder.itemMainBinding.layoutRemove.visibility = View.GONE
-            holder.itemMainBinding.layoutMore.visibility = View.GONE
-
-            holder.itemMainBinding.infoContainer.setOnClickListener {
+            // Click listener on entire card
+            holder.itemMainBinding.cardItem.setOnClickListener {
                 adapterListener?.onSelectServer(guid)
             }
         }
-
     }
 
-    /**
-     * Gets the server address information
-     * Hides part of IP or domain information for privacy protection
-     * @param profile The server configuration
-     * @return Formatted address string
-     */
     private fun getAddress(profile: ProfileItem): String {
         return profile.description.nullIfBlank() ?: AngConfigManager.generateDescription(profile)
     }
 
-    /**
-     * Gets the subscription remarks information
-     * @param profile The server configuration
-     * @return Subscription remarks string, or empty string if none
-     */
     private fun getSubscriptionRemarks(profile: ProfileItem): String {
         val subRemarks =
             if (mainViewModel.subscriptionId.isEmpty())
@@ -128,14 +126,12 @@ class MainRecyclerAdapter(
         val parts = mutableListOf<String>()
         parts.add(profile.configType.name)
 
-        // Transport: hide tcp or blank
         profile.network?.let { net ->
             if (net.isNotBlank() && !net.equals("tcp", ignoreCase = true)) {
                 parts.add(net)
             }
         }
 
-        // Security: hide blank or tls
         profile.security?.let { sec ->
             if (sec.isNotBlank() && !sec.equals("tls", ignoreCase = true)) {
                 parts.add(sec)
@@ -179,11 +175,11 @@ class MainRecyclerAdapter(
 
     open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun onItemSelected() {
-            itemView.setBackgroundColor(Color.LTGRAY)
+            itemView.setBackgroundColor(Color.TRANSPARENT)
         }
 
         fun onItemClear() {
-            itemView.setBackgroundColor(0)
+            itemView.setBackgroundColor(Color.TRANSPARENT)
         }
     }
 
@@ -202,10 +198,7 @@ class MainRecyclerAdapter(
         return true
     }
 
-    override fun onItemMoveCompleted() {
-        // do nothing
-    }
+    override fun onItemMoveCompleted() {}
 
-    override fun onItemDismiss(position: Int) {
-    }
+    override fun onItemDismiss(position: Int) {}
 }
