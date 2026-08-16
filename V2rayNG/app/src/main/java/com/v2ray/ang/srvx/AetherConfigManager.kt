@@ -86,7 +86,7 @@ object AetherConfigManager {
      * Ensures that the 3 free Aether profiles exist in MMKV and are up to date.
      */
     fun ensureFreeConfigs(forceRefresh: Boolean = false) {
-        val allServerGuids = MmkvManager.decodeServerList()
+        val allServerGuids = MmkvManager.decodeAllServerList()
 
         var hasMasque = false
         var hasWireGuard = false
