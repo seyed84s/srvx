@@ -12,8 +12,8 @@ android {
         applicationId = "ir.smcx.srvx"
         minSdk = 24
         targetSdk = 37
-        versionCode = 733
-        versionName = "2.2.3"
+        versionCode = 734
+        versionName = "2.3.0"
         multiDexEnabled = true
 
         val abiFilterList = (properties["ABI_FILTERS"] as? String)?.split(';')
