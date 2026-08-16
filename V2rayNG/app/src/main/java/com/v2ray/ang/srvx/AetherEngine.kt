@@ -50,7 +50,7 @@ object AetherEngine {
         builder.environment().apply {
             put("HOME", context.cacheDir.absolutePath)
             put("TMPDIR", context.cacheDir.absolutePath)
-            put("AETHER_LOG_LEVEL", "debug") // Set verbosity
+            put("AETHER_LOG_LEVEL", "off") // Fix overheating: disable spammy debug logs
             
             // Zero Trust credentials if present
             val team = AetherConfigManager.getZeroTrustTeam()
@@ -75,8 +75,13 @@ object AetherEngine {
                             Log.d("AetherEngine", line)
                         }
                     }
+                    proc.waitFor()
                 } catch (e: Exception) {
                     Log.e("AetherEngine", "Error reading engine output", e)
+                } finally {
+                    // Engine crashed or stopped. Tear down the VPN to save battery/radio.
+                    Log.w("AetherEngine", "Engine exited! Tearing down VPN...")
+                    com.v2ray.ang.util.MessageUtil.sendMsg2Service(context, com.v2ray.ang.AppConfig.MSG_STATE_STOP, "")
                 }
             }, "AetherEngine-Output").apply { isDaemon = true }.start()
 
