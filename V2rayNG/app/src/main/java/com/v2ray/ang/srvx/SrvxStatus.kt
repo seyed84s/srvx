@@ -35,8 +35,10 @@ object SrvxStatus {
                 }
                 refreshBtn.startAnimation(rotate)
                 refreshBtn.setOnClickListener {
-                    AetherConfigManager.ensureFreeConfigs(forceRefresh = true)
-                    refresh(activity)
+                    CoroutineScope(Dispatchers.Main).launch {
+                        AetherConfigManager.ensureFreeConfigs(forceRefresh = true)
+                        refresh(activity)
+                    }
                 }
             }
             return
